@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Projects Hub | Innovative Business Technology Solutions</title>
+    <meta name="description" content="Z-Projects Hub - A collection of innovative business technology solutions including PayrollApp, ProMa Property Tools, Janabs, and RPC services.">
+    <meta name="keywords" content="zprojects, payrollapp, promasuite, janabs, RPC, property management, payroll, ecommerce, technology solutions">
+
+    
+    <!-- Brand Consistency -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Z-Bridges Brand Colors */
+            --color-primary: #f8f9fa;
+            --color-secondary: #00e0ff;
+            --color-background: #0a0a0a;
+            --color-surface: #1a1a1a;
+            --color-accent: #b300b3;
+            --color-accent-alt: #a8a8a8;
+            --color-highlight: #ffb800;
+            --color-metallic: #c0c0c0;
+            --color-success: #00ff88;
+            --color-warning: #ff8800;
+            --color-info: #00e0ff;
+            --color-electric-green: #00ff99;
+            --color-polished-gold: #d4af37;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        .main-header {
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(248, 249, 250, 0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-main {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: var(--color-secondary);
+            line-height: 1;
+        }
+
+        .brand-sub {
+            font-size: 0.8rem;
+            color: var(--color-accent-alt);
+            letter-spacing: 1px;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--color-accent-alt);
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--color-secondary);
+            background: rgba(0, 224, 255, 0.1);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 224, 255, 0.1), rgba(179, 0, 179, 0.1));
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(248, 249, 250, 0.1);
+        }
+
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            color: var(--color-secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--color-accent-alt);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--color-secondary);
+            color: var(--color-background);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--color-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(179, 0, 179, 0.3);
+        }
+
+        /* Projects Grid */
+        .projects-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            color: var(--color-secondary);
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .project-card {
+            background: var(--color-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(248, 249, 250, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--color-secondary);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(0, 224, 255, 0.2), rgba(179, 0, 179, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .project-icon {
+            width: 80px;
+            height: 80px;
+            fill: var(--color-secondary);
+            z-index: 1;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-family: 'Oswald', sans-serif;
+            color: var(--color-secondary);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: var(--color-accent-alt);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-features li {
+            color: var(--color-accent-alt);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .project-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-success);
+            font-weight: bold;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .project-link {
+            flex: 1;
+            text-align: center;
+            background: rgba(0, 224, 255, 0.1);
+            color: var(--color-secondary);
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: var(--color-secondary);
+            color: var(--color-background);
+        }
+
+        .project-link.primary {
+            background: var(--color-secondary);
+            color: var(--color-background);
+        }
+
+        .project-link.primary:hover {
+            background: var(--color-accent);
+        }
+
+        /* Status Indicators */
+        .project-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .status-live {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--color-success);
+            border: 1px solid var(--color-success);
+        }
+
+        .status-development {
+            background: rgba(255, 136, 0, 0.2);
+            color: var(--color-warning);
+            border: 1px solid var(--color-warning);
+        }
+
+        .status-beta {
+            background: rgba(0, 224, 255, 0.2);
+            color: var(--color-secondary);
+            border: 1px solid var(--color-secondary);
+        }
+
+        .status-suite {
+            background: rgba(179, 0, 179, 0.2);
+            color: var(--color-accent);
+            border: 1px solid var(--color-accent);
+        }
+
+        /* ProMa Suite Specific Styles */
+        .proma-hero {
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230a0a0a"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="%2300e0ff" stroke-width="0.5"/></svg>');
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(248, 249, 250, 0.1);
+        }
+
+        .proma-hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            color: var(--color-secondary);
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 224, 255, 0.3);
+        }
+
+        .proma-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--color-accent-alt);
+        }
+
+        .proma-hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .proma-button-primary {
+            background-color: var(--color-secondary);
+            color: var(--color-background);
+            border: 2px solid var(--color-accent);
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .proma-button-primary:hover {
+            background-color: var(--color-accent);
+            color: var(--color-background);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(179, 0, 179, 0.3);
+        }
+
+        .proma-tools-section {
+            padding: 80px 0;
+        }
+
+        .proma-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .proma-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-accent);
+            border-radius: 8px;
+            padding: 25px;
+            color: var(--color-primary);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .proma-card:hover {
+            box-shadow: 0 0 15px var(--color-secondary);
+            transform: translateY(-5px);
+        }
+
+        .proma-card-icon {
+            font-size: 2.5rem;
+            color: var(--color-secondary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .proma-card-title {
+            font-family: 'Oswald', sans-serif;
+            color: var(--color-secondary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .proma-card-description {
+            flex-grow: 1;
+            margin-bottom: 20px;
+            color: var(--color-accent-alt);
+        }
+
+        .proma-card-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .proma-card-features li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+            color: var(--color-accent-alt);
+        }
+
+        .proma-card-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-success);
+            font-weight: bold;
+        }
+
+        .proma-card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .proma-card-button {
+            flex: 1;
+            text-align: center;
+            background: rgba(0, 224, 255, 0.1);
+            color: var(--color-secondary);
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .proma-card-button:hover {
+            background: var(--color-secondary);
+            color: var(--color-background);
+        }
+
+        .proma-benefits-section {
+            padding: 80px 0;
+            background-color: rgba(26, 26, 26, 0.7);
+        }
+
+        .proma-benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .proma-benefit-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .proma-benefit-icon {
+            font-size: 2.5rem;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+        }
+
+        .proma-benefit-title {
+            font-family: 'Oswald', sans-serif;
+            color: var(--color-secondary);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .proma-benefit-description {
+            color: var(--color-accent-alt);
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 4rem 2rem;
+            background: var(--color-surface);
+            border-top: 1px solid rgba(248, 249, 250, 0.1);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            fill: var(--color-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-family: 'Oswald', sans-serif;
+            color: var(--color-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .service-description {
+            color: var(--color-accent-alt);
+        }
+
+        /* Footer */
+        .main-footer {
+            background: var(--color-surface);
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(248, 249, 250, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--color-secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--color-accent-alt);
+            margin-bottom: 0.5rem;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--color-secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(248, 249, 250, 0.1);
+            color: var(--color-accent-alt);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-links {
+                flex-direction: column;
+            }
+
+            .proma-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .proma-tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .proma-card-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--color-background);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .mobile-nav .nav-link {
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            color: var(--color-secondary);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="logo-container">
+            <a href="https://z-bridges.com" class="logo">
+                <img src="https://zassets.z-bridges.com/zPhotos/Z-BridgesCo.png" alt="Z-Bridges Logo" class="logo-img">
+            </a>
+            <div class="brand-text">
+                <div class="brand-main">Z-PROJECTS</div>
+                <div class="brand-sub">TECHNOLOGY HUB</div>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <a href="#projects" class="nav-link active">Projects</a>
+            <a href="#proma" class="nav-link">ProMa Suite</a>
+            <a href="#services" class="nav-link">Services</a>
+            <a href="https://z-bridges.com" class="nav-link">Main Site</a>
+            <a href="https://z-bridges.com/zknowledge" class="nav-link">Knowledge Hub</a>
+        </nav>
+        
+        <button class="mobile-toggle">☰</button>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <button class="close-menu">×</button>
+        <nav class="mobile-nav">
+            <a href="#projects" class="nav-link active">Projects</a>
+            <a href="#proma" class="nav-link">ProMa Suite</a>
+            <a href="#services" class="nav-link">Services</a>
+            <a href="https://z-bridges.com" class="nav-link">Main Site</a>
+            <a href="https://z-bridges.com/zknowledge" class="nav-link">Knowledge Hub</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Z-PROJECTS HUB</h1>
+        <p>Innovative business technology solutions designed to streamline operations, enhance productivity, and drive business growth for SMBs.</p>
+        <a href="#projects" class="cta-button">Explore Projects</a>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section" id="projects">
+        <h2 class="section-title">Live Business Solutions</h2>
+        
+        <div class="projects-grid">
+            <!-- PayrollApp Project -->
+            <div class="project-card">
+                <div class="project-image">
+                    <svg class="project-icon" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <div class="project-content">
+                    <span class="project-status status-live">Live</span>
+                    <h3 class="project-title">PayrollApp</h3>
+                    <p class="project-description">
+                        Comprehensive remote employee payroll system with multi-currency support, automated calculations, and professional document generation for international teams.
+                    </p>
+                    <ul class="project-features">
+                        <li>Multi-currency payroll processing</li>
+                        <li>Automated timesheet calculations</li>
+                        <li>Professional payslip & certificate generation</li>
+                        <li>Employee database management</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="https://z-bridges.com/zprojects/payrollapp" class="project-link primary">Access App</a>
+                        <a href="https://z-bridges.com/zprojects/payrollapp/docs" class="project-link">User Guide</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ProMa Suite Project -->
+            <div class="project-card">
+                <div class="project-image">
+                    <svg class="project-icon" viewBox="0 0 24 24">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                    </svg>
+                </div>
+                <div class="project-content">
+                    <span class="project-status status-suite">Tool Suite</span>
+                    <h3 class="project-title">ProMa Suite</h3>
+                    <p class="project-description">
+                        Comprehensive property management tools including lockbox tracking, property intake, and compliance checklists for efficient property operations.
+                    </p>
+                    <ul class="project-features">
+                        <li>Lockbox & Key Management System</li>
+                        <li>Property Onboarding & Intake</li>
+                        <li>Rent-Ready Inspection Checklists</li>
+                        <li>Compliance & Safety Tracking</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="https://z-bridges.com/zprojects/promasuite/index.html" class="project-link primary">Visit Suite</a>
+                        <a href="https://z-bridges.com/zprojects/promasuite/docs" class="project-link">Documentation</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Janabs Project -->
+            <div class="project-card">
+                <div class="project-image">
+                    <svg class="project-icon" viewBox="0 0 24 24">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                    </svg>
+                </div>
+                <div class="project-content">
+                    <span class="project-status status-live">Live</span>
+                    <h3 class="project-title">Janabs</h3>
+                    <p class="project-description">
+                        Professional e-commerce platform for homemade candle business with wholesale pricing, inventory management, and automated catalog generation.
+                    </p>
+                    <ul class="project-features">
+                        <li>Interactive product catalog</li>
+                        <li>Dynamic wholesale pricing tiers</li>
+                        <li>Smart PDF price list generation</li>
+                        <li>Payment arrangement system</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="https://z-bridges.com/zprojects/janabs" class="project-link primary">View Store</a>
+                        <a href="https://z-bridges.com/zprojects/janabs/admin" class="project-link">Admin Panel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ProMa Suite Section -->
+    <section id="proma" class="proma-hero">
+        <div class="container">
+            <h1>ProMa Property Management Suite</h1>
+            <p>Streamline your property management operations with our comprehensive suite of specialized tools designed for efficiency, compliance, and seamless tenant onboarding.</p>
+            <div class="proma-hero-buttons">
+                <a href="#proma-tools" class="proma-button-primary">
+                    <i class="fas fa-tools"></i> Explore Tools
+                </a>
+                <a href="https://z-bridges.com/zprojects/promasuite/index.html" class="proma-button-primary">
+                    <i class="fas fa-external-link-alt"></i> Visit Suite
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ProMa Tools Section -->
+    <section id="proma-tools" class="proma-tools-section">
+        <div class="container">
+            <h2 class="section-title">Property Management Tools</h2>
+            <div class="proma-tools-grid">
+                <!-- Lockbox CK Ledger -->
+                <div class="proma-card">
+                    <div class="proma-card-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3 class="proma-card-title">LockBox CK Ledger</h3>
+                    <p class="proma-card-description">
+                        Centralized key and lockbox management system for tracking property access with location verification and comprehensive audit trails.
+                    </p>
+                    <ul class="proma-card-features">
+                        <li>Centralized lockbox and key tracking</li>
+                        <li>Location-based verification</li>
+                        <li>User activity logging</li>
+                        <li>Secure data storage</li>
+                        <li>Multi-select and search capabilities</li>
+                    </ul>
+                    <div class="proma-card-actions">
+                        <a href="https://z-bridges.com/zprojects/promasuite/lockbox-key-ledger.html" class="proma-card-button">
+                            <i class="fas fa-external-link-alt"></i> Open Tool
+                        </a>
+                        <a href="#lockbox-info" class="proma-card-button">
+                            <i class="fas fa-info-circle"></i> Learn More
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Property Unit Intake -->
+                <div class="proma-card">
+                    <div class="proma-card-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="proma-card-title">Property Unit Intake</h3>
+                    <p class="proma-card-description">
+                        Interactive onboarding system for portfolio acquisition with comprehensive property details, amenity tracking, and compliance verification.
+                    </p>
+                    <ul class="proma-card-features">
+                        <li>Interactive portfolio onboarding</li>
+                        <li>Comprehensive property details</li>
+                        <li>Amenity and feature tracking</li>
+                        <li>Tenancy and financial data</li>
+                        <li>Export to CSV functionality</li>
+                    </ul>
+                    <div class="proma-card-actions">
+                        <a href="https://z-bridges.com/zprojects/promasuite/property-unit-intake.html" class="proma-card-button">
+                            <i class="fas fa-external-link-alt"></i> Open Tool
+                        </a>
+                        <a href="#intake-info" class="proma-card-button">
+                            <i class="fas fa-info-circle"></i> Learn More
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Rent Ready Unit Checklist -->
+                <div class="proma-card">
+                    <div class="proma-card-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3 class="proma-card-title">Rent Ready Unit Checklist</h3>
+                    <p class="proma-card-description">
+                        Strategic protocol for compliance, performance, and ROI optimization with comprehensive inspection workflows and neighborhood analysis.
+                    </p>
+                    <ul class="proma-card-features">
+                        <li>Comprehensive inspection checklist</li>
+                        <li>Health, safety & mechanical systems</li>
+                        <li>MDE lead paint assessment</li>
+                        <li>Structural integrity evaluation</li>
+                        <li>Neighborhood condition reporting</li>
+                    </ul>
+                    <div class="proma-card-actions">
+                        <a href="https://z-bridges.com/zprojects/promasuite/rent-ready-unit-checklist.html" class="proma-card-button">
+                            <i class="fas fa-external-link-alt"></i> Open Tool
+                        </a>
+                        <a href="#checklist-info" class="proma-card-button">
+                            <i class="fas fa-info-circle"></i> Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ProMa Benefits Section -->
+    <section id="proma-benefits" class="proma-benefits-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose ProMa Suite?</h2>
+            <div class="proma-benefits-grid">
+                <div class="proma-benefit-card">
+                    <div class="proma-benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="proma-benefit-title">Enhanced Security</h3>
+                    <p class="proma-benefit-description">
+                        Secure tracking and management of property access with location verification and comprehensive audit trails.
+                    </p>
+                </div>
+                <div class="proma-benefit-card">
+                    <div class="proma-benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="proma-benefit-title">Operational Efficiency</h3>
+                    <p class="proma-benefit-description">
+                        Streamline property onboarding, inspections, and maintenance with standardized workflows.
+                    </p>
+                </div>
+                <div class="proma-benefit-card">
+                    <div class="proma-benefit-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3 class="proma-benefit-title">Compliance Ready</h3>
+                    <p class="proma-benefit-description">
+                        Ensure regulatory compliance with built-in checklists for rental licenses, lead certifications, and safety standards.
+                    </p>
+                </div>
+                <div class="proma-benefit-card">
+                    <div class="proma-benefit-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3 class="proma-benefit-title">Seamless Integration</h3>
+                    <p class="proma-benefit-description">
+                        Tools designed to work together, creating a cohesive property management ecosystem.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <h2 class="section-title">Our Development Services</h2>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <svg class="service-icon" viewBox="0 0 24 24">
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                </svg>
+                <h3 class="service-title">Custom Business Apps</h3>
+                <p class="service-description">
+                    Tailored software solutions designed to solve specific business challenges and streamline operations.
+                </p>
+            </div>
+            
+            <div class="service-card">
+                <svg class="service-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+                <h3 class="service-title">Process Automation</h3>
+                <p class="service-description">
+                    Intelligent automation solutions to eliminate manual processes and increase operational efficiency.
+                </p>
+            </div>
+            
+            <div class="service-card">
+                <svg class="service-icon" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                </svg>
+                <h3 class="service-title">Data & Analytics</h3>
+                <p class="service-description">
+                    Advanced analytics platforms and custom reporting solutions to drive data-informed decisions.
+                </p>
+            </div>
+            
+            <div class="service-card">
+                <svg class="service-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                <h3 class="service-title">E-commerce Solutions</h3>
+                <p class="service-description">
+                    Complete e-commerce platforms with inventory management, payment processing, and analytics.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Z-Projects Hub</h3>
+                <p>Innovative business technology solutions designed to drive operational excellence and business growth for small to medium businesses.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Live Projects</h3>
+                <a href="https://z-bridges.com/zprojects/payrollapp">PayrollApp</a>
+                <a href="https://z-bridges.com/zprojects/promasuite/index.html">ProMa Suite</a>
+                <a href="https://z-bridges.com/zprojects/janabs">Janabs Candles</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <a href="https://z-bridges.com">Main Website</a>
+                <a href="https://z-bridges.com/zknowledge">Knowledge Base</a>
+                <a href="mailto:devops@z-bridges.com">Contact Development</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Technical</h3>
+                <a href="https://z-bridges.com/zprojects/.well-known/cgi-bin">CGI Bin</a>
+                <a href="https://z-bridges.com/zprojects/sitemap.xml">Sitemap</a>
+                <a href="https://z-bridges.com/zprojects/robots.txt">Robots.txt</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Z-Bridges. All rights reserved. | Part of the Z-Bridges Technology Ecosystem</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const closeMenu = document.querySelector('.close-menu');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav .nav-link');
+
+            mobileToggle.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+            });
+
+            closeMenu.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+            });
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Active navigation highlighting
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // Add subtle animation to cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Apply initial styles and observe cards
+            document.querySelectorAll('.proma-card, .proma-benefit-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+
+    <!-- SEO Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Z-Projects Hub",
+        "url": "https://z-bridges.com/zprojects",
+        "logo": "https://zassets.z-bridges.com/zPhotos/Z-BridgesCo.png",
+        "description": "Innovative business technology solutions including payroll management, property management tools, e-commerce platforms, and RPC services.",
+        "sameAs": [
+            "https://z-bridges.com",
+            "https://z-bridges.com/zknowledge"
+        ],
+        "memberOf": {
+            "@type": "Organization",
+            "name": "Z-Bridges"
+        },
+        "makesOffer": [
+            {
+                "@type": "Service",
+                "name": "PayrollApp",
+                "description": "Comprehensive remote employee payroll system with multi-currency support"
+            },
+            {
+                "@type": "Service",
+                "name": "ProMa Suite",
+                "description": "Property management tools including lockbox tracking and compliance checklists"
+            },
+            {
+                "@type": "Service",
+                "name": "Janabs",
+                "description": "E-commerce platform for homemade candle business with wholesale pricing"
+            }
+        ]
+    }
+    </script>
+</body>
+</html>
