@@ -1,0 +1,1359 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Forgie — Aesthetics Full Design Deck</title>
+  <meta name="description" content="27 modular, print-ready aesthetics spanning Corporate, Creative, Tech, and Cultural use cases, designed to pair with Archie's Architect Deck." />
+  <link rel="icon" type="image/x-icon" href="https://knowledge.z-bridges.com/favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:wght@400;600&family=Poppins:wght@400;600&family=Bebas+Neue&family=Orbitron&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-okaidia.min.css" />
+  <style>
+    :root {
+      --font-sans: "Inter", system-ui, sans-serif;
+      --font-serif: "Source Serif 4", Georgia, serif;
+      --font-mono: ui-monospace, SFMono-Regular, monospace;
+      --bg: #ffffff;
+      --bg-alt: #f8fafc;
+      --fg: #0f172a;
+      --muted: #475569;
+      --accent: #0ea5e9;
+      --border: #e2e8f0;
+      --radius: 10px;
+      --shadow-1: 0 1px 3px rgba(0,0,0,.08);
+      --shadow-2: 0 6px 24px rgba(0,0,0,.08);
+      --s-1: .25rem; --s-2: .5rem; --s-3: .75rem; --s-4: 1rem;
+      --s-5: 1.25rem; --s-6: 1.5rem; --s-7: 2rem; --s-8: 3rem;
+      --content-max: 78rem;
+      --nav-w: 18rem;
+      --print-margin: 20mm;
+    }
+    [data-theme="dark"] {
+      --bg: #0a192f;
+      --bg-alt: #172a45;
+      --fg: #e6f1ff;
+      --muted: #94a3b8;
+      --accent: #64ffda;
+      --border: #233554;
+    }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      margin: 0;
+      color: var(--fg);
+      background: var(--bg-alt);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+    .shell { display: grid; grid-template-columns: 1fr; min-height: 100dvh; }
+    @media (min-width: 1024px) {
+      .shell { grid-template-columns: var(--nav-w) 1fr; }
+    }
+    nav.toc {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100dvh;
+      overflow: auto;
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      padding: var(--s-6) var(--s-4);
+    }
+    .brand { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-6); }
+    .brand .logo {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), #9333ea);
+      color: white;
+      font-weight: 700;
+      box-shadow: var(--shadow-1);
+    }
+    .toc h3 {
+      font-size: .95rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin: var(--s-5) 0 var(--s-3);
+      color: var(--muted);
+    }
+    .toc a { display: block; padding: .3rem 0; color: inherit; font-size: 0.9rem; }
+    .toc a.active { color: var(--accent); font-weight: 600; }
+    main {
+      background: var(--bg);
+      box-shadow: var(--shadow-2);
+      margin: var(--s-4);
+      border-radius: var(--radius);
+    }
+    @media (min-width: 1024px) {
+      main { margin: var(--s-7); }
+    }
+    header.page {
+      padding: var(--s-6) var(--s-5) var(--s-5);
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(14,165,233,.08), transparent 60%);
+      border-top-left-radius: var(--radius);
+      border-top-right-radius: var(--radius);
+    }
+     @media (min-width: 768px) {
+      header.page { padding: var(--s-8) var(--s-7) var(--s-6); }
+    }
+    header.page h1 {
+      font-family: var(--font-serif);
+      margin: 0 0 var(--s-2) 0;
+      font-size: clamp(1.6rem, 2vw + 1rem, 2.2rem);
+    }
+    header.page p.lead { color: var(--muted); max-width: 70ch; margin: 0; }
+    .content { padding: var(--s-5); max-width: var(--content-max); margin: 0 auto; }
+     @media (min-width: 768px) {
+      .content { padding: var(--s-7); }
+    }
+    section { padding-block: var(--s-6); border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; padding-bottom: var(--s-8); }
+    h2 {
+      font-size: 1.25rem;
+      margin: 0 0 var(--s-4) 0;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--fg);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .grid-12 {
+      display: grid;
+      gap: var(--s-6);
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+    .col-span-12 { grid-column: span 12; }
+    @media (min-width: 768px) { .md\:col-span-6 { grid-column: span 6; } }
+    @media (min-width: 1024px) { .lg\:col-span-4 { grid-column: span 4; } }
+    
+    .stack { display: flex; flex-direction: column; gap: var(--s-4); }
+    .card {
+      background: var(--bg);
+      border-radius: var(--radius);
+      padding: var(--s-5);
+      box-shadow: var(--shadow-1);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-2);
+    }
+    .style-name { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; }
+    .industry { font-size: .85rem; color: var(--muted); margin-bottom: 8px; }
+    .traits { font-size: .88rem; margin-bottom: 10px; }
+    .palette { display: flex; gap: 4px; margin-bottom: 10px; }
+    .swatch {
+      flex: 1;
+      height: 20px;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .swatch:hover::after {
+      content: attr(data-hex);
+      position: absolute;
+      bottom: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--fg);
+      color: var(--bg);
+      padding: 4px 8px;
+      font-size: .75rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      z-index: 10;
+    }
+    .fonts, .layout { font-size: .82rem; margin-bottom: 6px; }
+    .fonts strong, .layout strong { font-weight: 700; }
+    .meta { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+    .badge {
+      font-size: .72rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: var(--bg-alt);
+    }
+    pre[class*="language-"] {
+      padding: var(--s-4);
+      border-radius: var(--radius);
+      font-size: .8rem;
+      overflow-x: auto;
+      margin-top: var(--s-4);
+      position: relative;
+    }
+    .copy-btn {
+      font-size: .75rem;
+      padding: 4px 8px;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: var(--s-2);
+      align-self: flex-start;
+      transition: background-color 0.2s;
+    }
+    .copy-btn:hover { opacity: 0.9; }
+    .search-bar {
+      margin-bottom: var(--s-6);
+    }
+    .search-bar input {
+      width: 100%;
+      padding: var(--s-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      box-sizing: border-box;
+      background-color: var(--bg-alt);
+      color: var(--fg);
+    }
+    .glossary, footer {
+      margin-top: var(--s-8);
+      padding-top: var(--s-6);
+      border-top: 1px solid var(--border);
+    }
+    .glossary h2 { margin-bottom: var(--s-4); }
+    .glossary dt { font-weight: 600; margin-top: var(--s-3); }
+    .glossary dd { margin-left: var(--s-4); color: var(--muted); }
+    footer { font-size: .9rem; color: var(--muted); text-align: center; padding-bottom: var(--s-6); }
+    .reveal { opacity: 0; transform: translateY(8px); transition: .4s; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .toc-toggle { display: none; }
+    @media (max-width: 1024px) {
+      .shell { grid-template-columns: 1fr; }
+      nav.toc {
+        position: fixed; inset: 0; height: 100vh; z-index: 50; display: none; border-right: none;
+      }
+      nav.toc.open { display: block; }
+      .toc-toggle {
+        position: fixed;
+        right: var(--s-5);
+        bottom: var(--s-5);
+        z-index: 60;
+        display: grid;
+        place-items: center;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 999px;
+        box-shadow: var(--shadow-2);
+        background: var(--accent);
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+    }
+    @page { size: A4; margin: var(--print-margin); }
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      nav.toc, .no-print, .toc-toggle { display: none !important; }
+      main { margin: 0; box-shadow: none; border-radius: 0; }
+      .shell { display: block; }
+      a { text-decoration: none; color: inherit; }
+      a[href]:after { content: ""; }
+      .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+      h2, h3 { page-break-after: avoid; }
+      .page-break { break-before: page; }
+      .copy-btn, .search-bar { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { .reveal { transition: none; } }
+  </style>
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to content</a>
+  <div class="shell">
+    <nav class="toc" role="navigation" aria-label="Primary">
+      <div class="brand">
+        <div class="logo">F</div>
+        <div>
+          <strong>Forgie</strong><br>
+          <small>Aesthetics Deck</small>
+        </div>
+      </div>
+      <h3>Companion Deck</h3>
+      <!-- In a real application, this would link to the Archie deck file -->
+      <a href="#">Archie (Structure)</a>
+
+      <h3>Categories</h3>
+      <a href="#corporate">Corporate & Professional</a>
+      <a href="#creative">Creative & Lifestyle</a>
+      <a href="#tech">Technology & Innovation</a>
+      <a href="#cultural">Cultural & Event-Driven</a>
+      
+      <h3>Theme</h3>
+      <div class="cluster no-print" role="group" aria-label="Theme switch">
+        <button class="badge" data-theme-btn="light" aria-pressed="true">Light</button>
+        <button class="badge" data-theme-btn="dark" aria-pressed="false">Dark</button>
+      </div>
+    </nav>
+    <main id="main" role="main">
+      <header class="page">
+        <h1>Forgie — Aesthetics Full Design Deck</h1>
+        <p class="lead">27 modular, print-ready aesthetics spanning Corporate, Creative, Tech, and Cultural use cases. Designed to override Archie's tokens for seamless integration with semantic scaffolds, responsive grids, and UI components.</p>
+      </header>
+      <div class="content">
+        <div class="search-bar no-print">
+          <input type="search" id="search" placeholder="Search by name, industry, trait, or badge..." inputmode="search" autocomplete="off">
+        </div>
+        
+        <!-- Corporate -->
+        <div class="page-break"></div>
+        <section id="corporate" class="reveal">
+          <h2 class="keep-with-next">Corporate & Professional</h2>
+          <div class="grid-12">
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="classic executive finance banking clean lines authoritative presence timeless elegance modular print-ready formal archie grid-12 helvetica times new roman">
+              <div class="style-name">Classic Executive</div>
+              <div class="industry">Finance & Banking</div>
+              <div class="traits">Clean lines, authoritative presence, timeless elegance.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#001f3f;" data-hex="#001f3f"></div>
+                <div class="swatch" style="background:#0074d9;" data-hex="#0074d9"></div>
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#aaaaaa;" data-hex="#aaaaaa"></div>
+                <div class="swatch" style="background:#111111;" data-hex="#111111"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Helvetica</strong> | Times New Roman</div>
+              <div class="layout">Layout: <strong>Structured Grid</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Formal</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --accent: #0074d9;
+  --primary: #001f3f;
+  --secondary: #aaaaaa;
+  --font-sans: 'Helvetica', sans-serif;
+  --font-serif: 'Times New Roman', serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+            
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="modern professional legal services sleek trustworthy minimalistic design modular print-ready minimal archie cq arial georgia">
+              <div class="style-name">Modern Professional</div>
+              <div class="industry">Legal Services</div>
+              <div class="traits">Sleek, trustworthy, minimalistic design.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#2c3e50;" data-hex="#2c3e50"></div>
+                <div class="swatch" style="background:#bdc3c7;" data-hex="#bdc3c7"></div>
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#18bc9c;" data-hex="#18bc9c"></div>
+                <div class="swatch" style="background:#000000;" data-hex="#000000"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Arial</strong> | Georgia</div>
+              <div class="layout">Layout: <strong>Symmetric</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Minimal</div>
+                <div class="badge">Archie CQ</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #000000;
+  --accent: #18bc9c;
+  --primary: #2c3e50;
+  --secondary: #bdc3c7;
+  --font-sans: 'Arial', sans-serif;
+  --font-serif: 'Georgia', serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="corporate clean consulting clear professional approachable archie grid-12 roboto serif">
+              <div class="style-name">Corporate Clean</div>
+              <div class="industry">Consulting</div>
+              <div class="traits">Clear, professional, approachable.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#f7f7f7;" data-hex="#f7f7f7"></div>
+                <div class="swatch" style="background:#3498db;" data-hex="#3498db"></div>
+                <div class="swatch" style="background:#e67e22;" data-hex="#e67e22"></div>
+                <div class="swatch" style="background:#2ecc71;" data-hex="#2ecc71"></div>
+                <div class="swatch" style="background:#333333;" data-hex="#333333"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Roboto</strong> | Serif</div>
+              <div class="layout">Layout: <strong>Balanced</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #f7f7f7;
+  --fg: #333333;
+  --accent: #3498db;
+  --primary: #e67e22;
+  --secondary: #2ecc71;
+  --font-sans: 'Roboto', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="executive lux real estate luxurious sophisticated high-end luxury archie stack playfair display montserrat">
+              <div class="style-name">Executive Lux</div>
+              <div class="industry">Real Estate</div>
+              <div class="traits">Luxurious, sophisticated, high-end.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#d4af37;" data-hex="#d4af37"></div>
+                <div class="swatch" style="background:#000000;" data-hex="#000000"></div>
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#c0c0c0;" data-hex="#c0c0c0"></div>
+                <div class="swatch" style="background:#808080;" data-hex="#808080"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Playfair Display</strong> | Montserrat</div>
+              <div class="layout">Layout: <strong>Elegant Flow</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Luxury</div>
+                <div class="badge">Archie Stack</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #000000;
+  --accent: #d4af37;
+  --primary: #c0c0c0;
+  --secondary: #808080;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Montserrat', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="business standard insurance reliable straightforward secure archie grid-12 open sans lora">
+              <div class="style-name">Business Standard</div>
+              <div class="industry">Insurance</div>
+              <div class="traits">Reliable, straightforward, secure.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#00539c;" data-hex="#00539c"></div>
+                <div class="swatch" style="background:#ff6319;" data-hex="#ff6319"></div>
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#eeeeee;" data-hex="#eeeeee"></div>
+                <div class="swatch" style="background:#333333;" data-hex="#333333"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Open Sans</strong> | Lora</div>
+              <div class="layout">Layout: <strong>Standard Grid</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #333;
+  --accent: #ff6319;
+  --primary: #00539c;
+  --secondary: #eeeeee;
+  --font-sans: 'Open Sans', sans-serif;
+  --font-serif: 'Lora', serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="professional edge accounting sharp precise modern edge archie cq futura bodoni">
+              <div class="style-name">Professional Edge</div>
+              <div class="industry">Accounting</div>
+              <div class="traits">Sharp, precise, modern edge.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#4b0082;" data-hex="#4b0082"></div>
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#000000;" data-hex="#000000"></div>
+                <div class="swatch" style="background:#9370db;" data-hex="#9370db"></div>
+                <div class="swatch" style="background:#f8f8ff;" data-hex="#f8f8ff"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Futura</strong> | Bodoni</div>
+              <div class="layout">Layout: <strong>Dynamic</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Edge</div>
+                <div class="badge">Archie CQ</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #000000;
+  --accent: #9370db;
+  --primary: #4b0082;
+  --secondary: #f8f8ff;
+  --font-sans: 'Futura', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="corporate vibrant marketing energetic engaging archie grid-12 impact times">
+              <div class="style-name">Corporate Vibrant</div>
+              <div class="industry">Marketing</div>
+              <div class="traits">Vibrant, energetic, engaging.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#ff4136;" data-hex="#ff4136"></div>
+                <div class="swatch" style="background:#ffdc00;" data-hex="#ffdc00"></div>
+                <div class="swatch" style="background:#001f3f;" data-hex="#001f3f"></div>
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#aaaaaa;" data-hex="#aaaaaa"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Impact</strong> | Times</div>
+              <div class="layout">Layout: <strong>Vibrant Layout</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Vibrant</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #001f3f;
+  --accent: #ff4136;
+  --primary: #ffdc00;
+  --secondary: #aaaaaa;
+  --font-sans: 'Impact', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Creative -->
+        <div class="page-break"></div>
+        <section id="creative" class="reveal">
+          <h2 class="keep-with-next">Creative & Lifestyle</h2>
+          <div class="grid-12">
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="bohemian chic fashion free-spirited eclectic artistic creative archie stack brush script mt playfair display">
+              <div class="style-name">Bohemian Chic</div>
+              <div class="industry">Fashion</div>
+              <div class="traits">Free-spirited, eclectic, artistic.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#e74c3c;" data-hex="#e74c3c"></div>
+                <div class="swatch" style="background:#f39c12;" data-hex="#f39c12"></div>
+                <div class="swatch" style="background:#2ecc71;" data-hex="#2ecc71"></div>
+                <div class="swatch" style="background:#3498db;" data-hex="#3498db"></div>
+                <div class="swatch" style="background:#9b59b6;" data-hex="#9b59b6"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Brush Script MT</strong> | Playfair Display</div>
+              <div class="layout">Layout: <strong>Organic</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Creative</div>
+                <div class="badge">Archie Stack</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #333;
+  --accent: #e74c3c;
+  --primary: #9b59b6;
+  --secondary: #f39c12;
+  --font-serif: 'Playfair Display', serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="minimalist life home decor simple clean serene lifestyle archie grid-12 montserrat lato">
+              <div class="style-name">Minimalist Life</div>
+              <div class="industry">Home Decor</div>
+              <div class="traits">Simple, clean, serene.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#f5f5f5;" data-hex="#f5f5f5"></div>
+                <div class="swatch" style="background:#e0e0e0;" data-hex="#e0e0e0"></div>
+                <div class="swatch" style="background:#bdbdbd;" data-hex="#bdbdbd"></div>
+                <div class="swatch" style="background:#9e9e9e;" data-hex="#9e9e9e"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Montserrat</strong> | Lato</div>
+              <div class="layout">Layout: <strong>Minimal</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Lifestyle</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #9e9e9e;
+  --accent: #e0e0e0;
+  --primary: #f5f5f5;
+  --secondary: #bdbdbd;
+  --font-sans: 'Montserrat', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="vintage retro music nostalgic colorful fun archie grid-12 courier new times new roman">
+              <div class="style-name">Vintage Retro</div>
+              <div class="industry">Music</div>
+              <div class="traits">Nostalgic, colorful, fun.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#ff851b;" data-hex="#ff851b"></div>
+                <div class="swatch" style="background:#85144b;" data-hex="#85144b"></div>
+                <div class="swatch" style="background:#b10dc9;" data-hex="#b10dc9"></div>
+                <div class="swatch" style="background:#ffdc00;" data-hex="#ffdc00"></div>
+                <div class="swatch" style="background:#3d9970;" data-hex="#3d9970"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Courier New</strong> | Times New Roman</div>
+              <div class="layout">Layout: <strong>Retro Grid</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffdc00;
+  --fg: #85144b;
+  --accent: #ff851b;
+  --primary: #3d9970;
+  --secondary: #b10dc9;
+  --font-mono: 'Courier New', monospace;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="artistic expression art gallery expressive bold creative artistic archie stack avant garde brush script mt">
+              <div class="style-name">Artistic Expression</div>
+              <div class="industry">Art Gallery</div>
+              <div class="traits">Expressive, bold, creative.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#ff0000;" data-hex="#ff0000"></div>
+                <div class="swatch" style="background:#00ff00;" data-hex="#00ff00"></div>
+                <div class="swatch" style="background:#0000ff;" data-hex="#0000ff"></div>
+                <div class="swatch" style="background:#ffff00;" data-hex="#ffff00"></div>
+                <div class="swatch" style="background:#ff00ff;" data-hex="#ff00ff"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Avant Garde</strong> | Brush Script MT</div>
+              <div class="layout">Layout: <strong>Freeform</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Artistic</div>
+                <div class="badge">Archie Stack</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #000000;
+  --accent: #ff0000;
+  --primary: #0000ff;
+  --secondary: #ffff00;
+  --font-sans: 'Avant Garde', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="lifestyle zen wellness calm balanced natural archie stack lora open sans">
+              <div class="style-name">Lifestyle Zen</div>
+              <div class="industry">Wellness</div>
+              <div class="traits">Calm, balanced, natural.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#8fbc8f;" data-hex="#8fbc8f"></div>
+                <div class="swatch" style="background:#98fb98;" data-hex="#98fb98"></div>
+                <div class="swatch" style="background:#f0fff0;" data-hex="#f0fff0"></div>
+                <div class="swatch" style="background:#556b2f;" data-hex="#556b2f"></div>
+                <div class="swatch" style="background:#9acd32;" data-hex="#9acd32"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Lora</strong> | Open Sans</div>
+              <div class="layout">Layout: <strong>Zen Flow</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Archie Stack</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #f0fff0;
+  --fg: #556b2f;
+  --accent: #9acd32;
+  --primary: #8fbc8f;
+  --secondary: #98fb98;
+  --font-serif: 'Lora', serif;
+  --font-sans: 'Open Sans', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="creative burst design agency dynamic innovative vibrant archie grid-12 poppins merriweather">
+              <div class="style-name">Creative Burst</div>
+              <div class="industry">Design Agency</div>
+              <div class="traits">Dynamic, innovative, vibrant.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#ff9900;" data-hex="#ff9900"></div>
+                <div class="swatch" style="background:#146eb4;" data-hex="#146eb4"></div>
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#000000;" data-hex="#000000"></div>
+                <div class="swatch" style="background:#cccccc;" data-hex="#cccccc"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Poppins</strong> | Merriweather</div>
+              <div class="layout">Layout: <strong>Burst Layout</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #000000;
+  --accent: #ff9900;
+  --primary: #146eb4;
+  --secondary: #cccccc;
+  --font-sans: 'Poppins', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="urban lifestyle fashion edgy contemporary archie grid-12 bebas neue roboto">
+              <div class="style-name">Urban Lifestyle</div>
+              <div class="industry">Urban Fashion</div>
+              <div class="traits">Edgy, urban, contemporary.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#333333;" data-hex="#333333"></div>
+                <div class="swatch" style="background:#666666;" data-hex="#666666"></div>
+                <div class="swatch" style="background:#999999;" data-hex="#999999"></div>
+                <div class="swatch" style="background:#ccccc0;" data-hex="#ccccc0"></div>
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Bebas Neue</strong> | Roboto</div>
+              <div class="layout">Layout: <strong>Urban Grid</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Urban</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #333333;
+  --accent: #999999;
+  --primary: #666666;
+  --secondary: #ccccc0;
+  --font-sans: 'Bebas Neue', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tech -->
+        <div class="page-break"></div>
+        <section id="tech" class="reveal">
+          <h2 class="keep-with-next">Technology & Innovation</h2>
+          <div class="grid-12">
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="futuristic tech software development sleek high-tech innovative archie cq source code pro futura">
+              <div class="style-name">Futuristic Tech</div>
+              <div class="industry">Software Development</div>
+              <div class="traits">Sleek, high-tech, innovative.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#0d1117;" data-hex="#0d1117"></div>
+                <div class="swatch" style="background:#010409;" data-hex="#010409"></div>
+                <div class="swatch" style="background:#c9d1d9;" data-hex="#c9d1d9"></div>
+                <div class="swatch" style="background:#58a6ff;" data-hex="#58a6ff"></div>
+                <div class="swatch" style="background:#1f6feb;" data-hex="#1f6feb"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Source Code Pro</strong> | Futura</div>
+              <div class="layout">Layout: <strong>Asymmetric</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Tech</div>
+                <div class="badge">Archie CQ</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #010409;
+  --fg: #c9d1d9;
+  --accent: #58a6ff;
+  --primary: #1f6feb;
+  --secondary: #0d1117;
+  --font-mono: 'Source Code Pro', monospace;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="digital minimal app development clean digital user-friendly archie grid-12 roboto inter">
+              <div class="style-name">Digital Minimal</div>
+              <div class="industry">App Development</div>
+              <div class="traits">Clean, digital, user-friendly.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#000000;" data-hex="#000000"></div>
+                <div class="swatch" style="background:#4285f4;" data-hex="#4285f4"></div>
+                <div class="swatch" style="background:#34a853;" data-hex="#34a853"></div>
+                <div class="swatch" style="background:#fbbc05;" data-hex="#fbbc05"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Roboto</strong> | Inter</div>
+              <div class="layout">Layout: <strong>Grid Minimal</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #000000;
+  --accent: #4285f4;
+  --primary: #34a853;
+  --secondary: #fbbc05;
+  --font-sans: 'Roboto', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="innovation blue ai machine learning blue-toned futuristic intelligent archie grid-12 orbitron source code pro">
+              <div class="style-name">Innovation Blue</div>
+              <div class="industry">AI & Machine Learning</div>
+              <div class="traits">Blue-toned, futuristic, intelligent.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#00008b;" data-hex="#00008b"></div>
+                <div class="swatch" style="background:#add8e6;" data-hex="#add8e6"></div>
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#87ceeb;" data-hex="#87ceeb"></div>
+                <div class="swatch" style="background:#4682b4;" data-hex="#4682b4"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Orbitron</strong> | Source Code Pro</div>
+              <div class="layout">Layout: <strong>Innovative</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">AI</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #00008b;
+  --accent: #4682b4;
+  --primary: #87ceeb;
+  --secondary: #add8e6;
+  --font-sans: 'Orbitron', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="cyber neon cybersecurity secure high-contrast archie grid-12 source code pro inconsolata">
+              <div class="style-name">Cyber Neon</div>
+              <div class="industry">Cybersecurity</div>
+              <div class="traits">Neon, secure, high-contrast.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#000000;" data-hex="#000000"></div>
+                <div class="swatch" style="background:#ff00ff;" data-hex="#ff00ff"></div>
+                <div class="swatch" style="background:#00ffff;" data-hex="#00ffff"></div>
+                <div class="swatch" style="background:#ff0000;" data-hex="#ff0000"></div>
+                <div class="swatch" style="background:#00ff00;" data-hex="#00ff00"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Source Code Pro</strong> | Inconsolata</div>
+              <div class="layout">Layout: <strong>Neon Grid</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Cyber</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #000000;
+  --fg: #00ff00;
+  --accent: #ff00ff;
+  --primary: #00ffff;
+  --secondary: #ff0000;
+  --font-mono: 'Source Code Pro', monospace;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="tech green eco-friendly modern sustainable archie stack verdana georgia">
+              <div class="style-name">Tech Green</div>
+              <div class="industry">Green Tech</div>
+              <div class="traits">Eco-friendly, modern, sustainable.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#228b22;" data-hex="#228b22"></div>
+                <div class="swatch" style="background:#90ee90;" data-hex="#90ee90"></div>
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#006400;" data-hex="#006400"></div>
+                <div class="swatch" style="background:#32cd32;" data-hex="#32cd32"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Verdana</strong> | Georgia</div>
+              <div class="layout">Layout: <strong>Sustainable Flow</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Green</div>
+                <div class="badge">Archie Stack</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #006400;
+  --accent: #228b22;
+  --primary: #90ee90;
+  --secondary: #32cd32;
+  --font-sans: 'Verdana', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="innovation hub startup dynamic collaborative cutting-edge archie grid-12 poppins roboto">
+              <div class="style-name">Innovation Hub</div>
+              <div class="industry">Startup</div>
+              <div class="traits">Dynamic, collaborative, cutting-edge.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#ff4500;" data-hex="#ff4500"></div>
+                <div class="swatch" style="background:#ffd700;" data-hex="#ffd700"></div>
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#000000;" data-hex="#000000"></div>
+                <div class="swatch" style="background:#1e90ff;" data-hex="#1e90ff"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Poppins</strong> | Roboto</div>
+              <div class="layout">Layout: <strong>Hub Layout</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #000000;
+  --accent: #ff4500;
+  --primary: #ffd700;
+  --secondary: #1e90ff;
+  --font-sans: 'Poppins', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="digital wave media wavy fluid archie stack inter lora">
+              <div class="style-name">Digital Wave</div>
+              <div class="industry">Digital Media</div>
+              <div class="traits">Wavy, fluid, digital.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#00bfff;" data-hex="#00bfff"></div>
+                <div class="swatch" style="background:#20b2aa;" data-hex="#20b2aa"></div>
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#87cefa;" data-hex="#87cefa"></div>
+                <div class="swatch" style="background:#00008b;" data-hex="#00008b"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Inter</strong> | Lora</div>
+              <div class="layout">Layout: <strong>Wave</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Archie Stack</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #00008b;
+  --accent: #00bfff;
+  --primary: #20b2aa;
+  --secondary: #87cefa;
+  --font-sans: 'Inter', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Cultural -->
+        <div class="page-break"></div>
+        <section id="cultural" class="reveal">
+          <h2 class="keep-with-next">Cultural & Event-Driven</h2>
+          <div class="grid-12">
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="festival vibrant events colorful festive energetic archie grid-12 impact comic sans ms">
+              <div class="style-name">Festival Vibrant</div>
+              <div class="industry">Events</div>
+              <div class="traits">Colorful, festive, energetic.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#ff0000;" data-hex="#ff0000"></div>
+                <div class="swatch" style="background:#ffa500;" data-hex="#ffa500"></div>
+                <div class="swatch" style="background:#ffff00;" data-hex="#ffff00"></div>
+                <div class="swatch" style="background:#008000;" data-hex="#008000"></div>
+                <div class="swatch" style="background:#0000ff;" data-hex="#0000ff"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Impact</strong> | Comic Sans MS</div>
+              <div class="layout">Layout: <strong>Vibrant Grid</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Festival</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffff00;
+  --fg: #000000;
+  --accent: #ff0000;
+  --primary: #0000ff;
+  --secondary: #008000;
+  --font-sans: 'Impact', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="heritage classic cultural traditional elegant historical archie stack times new roman garamond">
+              <div class="style-name">Heritage Classic</div>
+              <div class="industry">Cultural Heritage</div>
+              <div class="traits">Traditional, elegant, historical.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#8b4513;" data-hex="#8b4513"></div>
+                <div class="swatch" style="background:#cd853f;" data-hex="#cd853f"></div>
+                <div class="swatch" style="background:#f5f5dc;" data-hex="#f5f5dc"></div>
+                <div class="swatch" style="background:#a52a2a;" data-hex="#a52a2a"></div>
+                <div class="swatch" style="background:#556b2f;" data-hex="#556b2f"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Times New Roman</strong> | Garamond</div>
+              <div class="layout">Layout: <strong>Classic</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Heritage</div>
+                <div class="badge">Archie Stack</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #f5f5dc;
+  --fg: #556b2f;
+  --accent: #8b4513;
+  --primary: #a52a2a;
+  --secondary: #cd853f;
+  --font-serif: 'Times New Roman', serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="event modern conferences contemporary engaging dynamic archie stack helvetica arial">
+              <div class="style-name">Event Modern</div>
+              <div class="industry">Conferences</div>
+              <div class="traits">Contemporary, engaging, dynamic.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#4f4f4f;" data-hex="#4f4f4f"></div>
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#ff6347;" data-hex="#ff6347"></div>
+                <div class="swatch" style="background:#4682b4;" data-hex="#4682b4"></div>
+                <div class="swatch" style="background:#32cd32;" data-hex="#32cd32"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Helvetica</strong> | Arial</div>
+              <div class="layout">Layout: <strong>Modern Flow</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Archie Stack</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #4f4f4f;
+  --accent: #ff6347;
+  --primary: #4682b4;
+  --secondary: #32cd32;
+  --font-sans: 'Helvetica', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="cultural fusion multicultural events diverse inclusive archie grid-12 poppins lora">
+              <div class="style-name">Cultural Fusion</div>
+              <div class="industry">Multicultural Events</div>
+              <div class="traits">Fusion, diverse, inclusive.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#ff69b4;" data-hex="#ff69b4"></div>
+                <div class="swatch" style="background:#00fa9a;" data-hex="#00fa9a"></div>
+                <div class="swatch" style="background:#ffdab9;" data-hex="#ffdab9"></div>
+                <div class="swatch" style="background:#e6e6fa;" data-hex="#e6e6fa"></div>
+                <div class="swatch" style="background:#fffacd;" data-hex="#fffacd"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Poppins</strong> | Lora</div>
+              <div class="layout">Layout: <strong>Fusion Grid</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Fusion</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #fffacd;
+  --fg: #333;
+  --accent: #ff69b4;
+  --primary: #00fa9a;
+  --secondary: #ffdab9;
+  --font-sans: 'Poppins', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="holiday cheer holidays joyful festive warm archie stack brush script mt times new roman">
+              <div class="style-name">Holiday Cheer</div>
+              <div class="industry">Holidays</div>
+              <div class="traits">Joyful, festive, warm.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#ff0000;" data-hex="#ff0000"></div>
+                <div class="swatch" style="background:#228b22;" data-hex="#228b22"></div>
+                <div class="swatch" style="background:#ffd700;" data-hex="#ffd700"></div>
+                <div class="swatch" style="background:#ffffff;" data-hex="#ffffff"></div>
+                <div class="swatch" style="background:#c0c0c0;" data-hex="#c0c0c0"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Brush Script MT</strong> | Times New Roman</div>
+              <div class="layout">Layout: <strong>Cheer Layout</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Holiday</div>
+                <div class="badge">Archie Stack</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #228b22;
+  --accent: #ff0000;
+  --primary: #ffd700;
+  --secondary: #c0c0c0;
+  --font-serif: 'Times New Roman', serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="art festival culture expressive dynamic colorful archie grid-12 bebas neue inter">
+              <div class="style-name">Art Festival</div>
+              <div class="industry">Art & Culture</div>
+              <div class="traits">Expressive, dynamic, colorful.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#f03a47;" data-hex="#f03a47"></div>
+                <div class="swatch" style="background:#f6f4f3;" data-hex="#f6f4f3"></div>
+                <div class="swatch" style="background:#000000;" data-hex="#000000"></div>
+                <div class="swatch" style="background:#235789;" data-hex="#235789"></div>
+                <div class="swatch" style="background:#fed766;" data-hex="#fed766"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Bebas Neue</strong> | Inter</div>
+              <div class="layout">Layout: <strong>Asymmetric Blocks</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Cultural</div>
+                <div class="badge">Archie Grid-12</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #f6f4f3;
+  --fg: #000000;
+  --accent: #f03a47;
+  --primary: #235789;
+  --secondary: #fed766;
+  --font-sans: 'Bebas Neue', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6 lg:col-span-4" data-search-content="global village international events diverse inclusive worldly archie stack poppins source serif 4">
+              <div class="style-name">Global Village</div>
+              <div class="industry">International Events</div>
+              <div class="traits">Diverse, inclusive, worldly.</div>
+              <div class="palette">
+                <div class="swatch" style="background:#4a4e4d;" data-hex="#4a4e4d"></div>
+                <div class="swatch" style="background:#0e9aa7;" data-hex="#0e9aa7"></div>
+                <div class="swatch" style="background:#3da4ab;" data-hex="#3da4ab"></div>
+                <div class="swatch" style="background:#f6cd61;" data-hex="#f6cd61"></div>
+                <div class="swatch" style="background:#fe8a71;" data-hex="#fe8a71"></div>
+              </div>
+              <div class="fonts">Fonts: <strong>Poppins</strong> | Source Serif 4</div>
+              <div class="layout">Layout: <strong>Inclusive Grid</strong></div>
+              <div class="meta">
+                <div class="badge">Modular</div>
+                <div class="badge">Print-Ready</div>
+                <div class="badge">Cultural</div>
+                <div class="badge">Archie Stack</div>
+              </div>
+              <pre><code class="language-css">:root {
+  --bg: #f0f0f0;
+  --fg: #4a4e4d;
+  --accent: #fe8a71;
+  --primary: #0e9aa7;
+  --secondary: #f6cd61;
+  --font-sans: 'Poppins', sans-serif;
+}</code></pre>
+              <button class="copy-btn no-print">Copy Code</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Glossary -->
+        <section class="glossary reveal">
+          <h2>Glossary</h2>
+          <dl>
+            <dt>Archie's Grid-12</dt>
+            <dd>A 12-column responsive grid system from the Archie's Architect Deck, used for creating structured, predictable layouts.</dd>
+            <dt>Archie's Stack</dt>
+            <dd>A layout component from Archie's for vertical rhythm, arranging elements in a single column with consistent spacing.</dd>
+            <dt>Archie's CQ (Container Queries)</dt>
+            <dd>Refers to components that adapt based on their container's size, rather than the viewport, allowing for more modular design.</dd>
+            <dt>Modular</dt>
+            <dd>Indicates the aesthetic is designed in self-contained blocks (cards, sections) that can be easily rearranged or reused.</dd>
+            <dt>Print-Ready</dt>
+            <dd>The aesthetic includes styles and considerations for high-quality printing, such as appropriate color profiles and page layout rules.</dd>
+          </dl>
+        </section>
+      </div>
+      <footer class="reveal">
+        <p>&copy; 2024 Forgie Design. All aesthetics are open-source and compatible with Archie's Architect Deck.</p>
+      </footer>
+    </main>
+  </div>
+  <button class="toc-toggle no-print" aria-controls="toc" aria-expanded="false" title="Toggle navigation">≡</button>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Scroll-triggered reveal ---
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+            }
+          });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      } else {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+      }
+
+      // --- Search functionality ---
+      const searchInput = document.getElementById('search');
+      const cards = document.querySelectorAll('.card');
+      const sections = document.querySelectorAll('section');
+      searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase().trim();
+        cards.forEach(card => {
+          const content = (card.dataset.searchContent || card.textContent).toLowerCase();
+          card.style.display = content.includes(term) ? '' : 'none';
+        });
+        // Hide section titles if all cards within are hidden
+        sections.forEach(sec => {
+            const visibleCards = sec.querySelectorAll('.card[style*="display: none;"]');
+            const totalCards = sec.querySelectorAll('.card');
+            if(totalCards.length > 0 && totalCards.length === visibleCards.length){
+                sec.style.display = 'none';
+            } else {
+                sec.style.display = '';
+            }
+        });
+      });
+
+      // --- Copy code functionality ---
+      document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const pre = btn.previousElementSibling;
+          if (pre && pre.tagName === 'PRE') {
+            const code = pre.querySelector('code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+              btn.textContent = 'Copied!';
+              setTimeout(() => { btn.textContent = 'Copy Code'; }, 2000);
+            }).catch(err => {
+              console.error('Failed to copy text: ', err);
+            });
+          }
+        });
+      });
+
+      // --- Active TOC link highlighting ---
+      const tocLinks = document.querySelectorAll('.toc a[href^="#"]');
+      const sectionElements = Array.from(tocLinks).map(link => document.getElementById(link.getAttribute('href').substring(1))).filter(Boolean);
+      
+      const onScroll = () => {
+        const pos = window.scrollY + (window.innerHeight * 0.3); // 30% from top
+        let current = null;
+        sectionElements.forEach(sec => { if (sec.offsetTop <= pos) current = sec; });
+        tocLinks.forEach(link => {
+          link.classList.toggle('active', current && link.getAttribute('href') === `#${current.id}`);
+        });
+      };
+      document.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // --- Theme Switch ---
+      const themeBtns = document.querySelectorAll('[data-theme-btn]');
+      themeBtns.forEach(btn => btn.addEventListener('click', () => {
+        const theme = btn.dataset.themeBtn;
+        document.documentElement.setAttribute('data-theme', theme);
+        document.body.setAttribute('data-theme', theme); // Also apply to body for compatibility
+        themeBtns.forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+      }));
+
+      // --- Mobile TOC Toggle ---
+      const toc = document.querySelector('nav.toc');
+      const toggle = document.querySelector('.toc-toggle');
+      if (toggle && toc) {
+        toggle.addEventListener('click', () => {
+          const open = toc.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', String(open));
+        });
+      }
+    });
+  </script>
+  <footer role="contentinfo" class="border-t mt-16" style="border-color: var(--border);">
+  <div class="container mx-auto px-4 py-8 text-center text-sm" style="color: var(--text-secondary);">
+    <p>&copy; 2025 Z‑Bridges Company. All rights reserved.</p>
+    <p class="mt-2">
+      An open‑source library of design systems, strategic frameworks, and operational playbooks.
+    </p>
+
+    <p class="mt-4 flex items-center justify-center gap-2">
+      <!-- Founder Monogram SVG -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24" height="24" viewBox="0 0 24 24"
+        aria-hidden="true" focusable="false"
+        style="display:inline-block"
+      >
+        <defs>
+          <!-- Subtle neon gradient for cyberpunk glow -->
+          <linearGradient id="zglow" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="var(--accent)" />
+            <stop offset="100%" stop-color="var(--accent-2, #6ae3ff)" />
+          </linearGradient>
+        </defs>
+
+        <!-- Outer soft glow -->
+        <circle cx="12" cy="12" r="10" fill="url(#zglow)" opacity=".18" />
+
+        <!-- Inner badge ring -->
+        <circle cx="12" cy="12" r="8.5" fill="none" stroke="var(--accent)" stroke-width="1.25" />
+
+        <!-- Ring ticks for mechanical detail -->
+        <g stroke="var(--accent)" stroke-width="1" stroke-linecap="round" opacity=".9">
+          <line x1="12" y1="2.8" x2="12" y2="4.2" />
+          <line x1="21.2" y1="12" x2="19.8" y2="12" />
+          <line x1="12" y1="21.2" x2="12" y2="19.8" />
+          <line x1="2.8" y1="12" x2="4.2" y2="12" />
+        </g>
+
+        <!-- Stylized Z path -->
+        <path
+          d="M7.25 8.25 H16.75
+             L7.45 15.85
+             H16.75"
+          fill="none"
+          stroke="var(--on-accent, #ffffff)"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+
+        <!-- Micro rivets -->
+        <g fill="var(--on-accent, #ffffff)" opacity=".9">
+          <circle cx="7.25" cy="8.25" r=".7" />
+          <circle cx="16.75" cy="8.25" r=".7" />
+          <circle cx="7.45" cy="15.85" r=".7" />
+          <circle cx="16.75" cy="15.85" r=".7" />
+        </g>
+      </svg>
+
+      <a
+        href="https://z-bridges.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="color: var(--accent); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--accent); transition: color 200ms ease, border-color 200ms ease, text-shadow 200ms ease;"
+        onmouseover="this.style.textShadow='0 0 6px var(--accent)';"
+        onmouseout="this.style.textShadow='none';"
+      >
+        Founder’s Portfolio
+      </a>
+    </p>
+  </div>
+</footer>
+</body>
+</html>

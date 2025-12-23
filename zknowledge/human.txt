@@ -1,0 +1,13 @@
+# humans.txt - The people behind this website
+
+# PROJECT
+Project Name: zLibrary
+Project Lead: Zaphyr Zur Pomicpic
+Developer: Zaphyr Zur Pomicpic
+Contact: zaphyr@z-bridges.com / www.z-bridges.com
+GitHub: [Your GitHub Profile URL]
+
+# SITE
+Last update: 2025-08-26
+Standards: HTML5, CSS3, JavaScript
+Software: Visual Studio Code

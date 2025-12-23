@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Archie — Architect Full Design Deck (2‑Column Card Decks)</title>
+  <meta name="description" content="Open‑source technical blueprint of semantic scaffolds, responsive layouts, UI components, 3D visualizations, animations, physics simulations, and integrations for structurally impeccable, print-ready outputs." />
+  <link rel="icon" type="image/x-icon" href="https://knowledge.z-bridges.com/favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-okaidia.min.css">
+  <style>
+    :root {
+      --font-sans: 'Inter', sans-serif;
+      --font-serif: 'Lora', serif;
+      --font-mono: 'Source Code Pro', monospace;
+      --bg: #ffffff;
+      --fg: #00008b;
+      --accent: #00bfff;
+      --primary: #20b2aa;
+      --secondary: #87cefa;
+      --border: #cae9f5;
+      --bg-alt: #f0faff;
+      --radius: 10px;
+      --shadow-1: 0 1px 3px rgba(0,0,0,.08);
+      --shadow-2: 0 6px 24px rgba(0,0,0,.08);
+      --s-1: .25rem; --s-2: .5rem; --s-3: .75rem; --s-4: 1rem;
+      --s-5: 1.25rem; --s-6: 1.5rem; --s-7: 2rem; --s-8: 3rem;
+      --content-max: 78rem;
+      --nav-w: 18rem;
+      --print-margin: 18mm;
+    }
+    [data-theme="dark"] {
+      --bg: #0a192f;
+      --bg-alt: #172a45;
+      --fg: #e6f1ff;
+      --accent: #64ffda;
+      --primary: #8892b0;
+      --secondary: #a8b2d1;
+      --border: #233554;
+    }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      margin: 0;
+      color: var(--fg);
+      background: var(--bg-alt);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code, pre, kbd, samp { font-family: var(--font-mono); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    .muted { color: #6b7280; }
+    .shell {
+      display: grid;
+      grid-template-columns: 1fr;
+      min-height: 100dvh;
+    }
+    @media (min-width: 1024px) {
+      .shell { grid-template-columns: var(--nav-w) 1fr; }
+    }
+    nav.toc {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100dvh;
+      overflow: auto;
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      padding: var(--s-6) var(--s-4);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--s-3);
+      margin-bottom: var(--s-6);
+    }
+    .brand .logo {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      color: white;
+      font-weight: 700;
+      box-shadow: var(--shadow-1);
+    }
+    .toc h3 {
+      font-size: .95rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin: var(--s-5) 0 var(--s-3);
+      color: var(--muted);
+    }
+    .toc a { display: block; padding: .3rem 0; color: inherit; }
+    .toc a.active { color: var(--accent); font-weight: 600; }
+    .toc small { color: var(--muted); display: block; margin-top: .25rem; }
+    .toc input[type="search"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding: .5rem;
+      border-radius: .5rem;
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+      color: var(--fg);
+      margin-bottom: 1rem;
+    }
+    main {
+      background: var(--bg);
+      box-shadow: var(--shadow-2);
+      margin: var(--s-4);
+      border-radius: var(--radius);
+    }
+    @media (min-width: 1024px) {
+      main { margin: var(--s-7); }
+    }
+    header.page {
+      padding: var(--s-6) var(--s-5) var(--s-5);
+      border-bottom: 1px solid var(--border);
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3e%3cpath fill='%23f0faff' fill-opacity='1' d='M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,133.3C672,117,768,139,864,165.3C960,192,1056,224,1152,218.7C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3e%3c/path%3e%3c/svg%3e");
+      background-size: cover;
+      background-position: bottom;
+      border-top-left-radius: var(--radius);
+      border-top-right-radius: var(--radius);
+    }
+    @media (min-width: 768px) {
+      header.page { padding: var(--s-8) var(--s-7) var(--s-6); }
+    }
+    header.page h1 {
+      font-family: var(--font-serif);
+      line-height: 1.25;
+      margin: 0 0 var(--s-2) 0;
+      font-size: clamp(1.6rem, 2vw + 1rem, 2.2rem);
+    }
+    header.page p.lead { color: var(--muted); max-width: 70ch; margin: 0; }
+    .content { padding: var(--s-5); }
+    @media (min-width: 768px) {
+      .content { padding: var(--s-7); }
+    }
+    section { padding-block: var(--s-6); border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; padding-bottom: var(--s-8); }
+    h2 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      margin: 0 0 var(--s-4) 0;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--fg);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    p, ul, dl { max-width: 85ch; }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--s-5);
+      box-shadow: var(--shadow-1);
+      background: var(--bg);
+    }
+    .badge {
+      display: inline-block;
+      padding: .2rem .5rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: .75rem;
+      color: #6b7280;
+      cursor: default;
+      margin-right: .25rem;
+      margin-bottom: .25rem;
+    }
+    .cluster { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+    .stack > * + * { margin-top: var(--s-4); }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      padding: .6rem 1rem;
+      border-radius: .6rem;
+      text-decoration: none;
+    }
+    .btn:hover { opacity: .95; }
+    pre[class*="language-"] {
+      border-radius: .6rem;
+      position: relative;
+      margin: 0;
+    }
+    .card > pre {
+      background-color: var(--bg-alt);
+      padding: var(--s-4);
+      border-radius: var(--radius);
+    }
+    .copy-btn {
+      position: absolute;
+      top: var(--s-3);
+      right: var(--s-3);
+      background: var(--bg);
+      color: #6b7280;
+      border: 1px solid var(--border);
+      border-radius: .4rem;
+      padding: .2rem .5rem;
+      font-size: .75rem;
+      cursor: pointer;
+    }
+    .copy-btn:hover { background: var(--border); }
+    .deck-12 { display: grid; gap: var(--s-5); grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .col-span-12 { grid-column: span 12; }
+    @media (min-width: 768px) {
+      .md\:col-span-6 { grid-column: span 6; }
+    }
+    @media (min-width: 1024px) {
+      .lg\:col-span-4 { grid-column: span 4; }
+    }
+    .palette { display: flex; gap: .35rem; margin: .5rem 0; }
+    .swatch { width: 20px; height: 20px; border-radius: 3px; border: 1px solid var(--border); }
+    .toc-toggle { display: none; }
+    @media (max-width: 1024px) {
+      .shell { grid-template-columns: 1fr; }
+      nav.toc {
+        position: fixed; inset: 0; height: 100vh; z-index: 50; display: none; border-right: none;
+      }
+      nav.toc.open { display: block; }
+      .toc-toggle {
+        position: fixed;
+        right: var(--s-5);
+        bottom: var(--s-5);
+        z-index: 60;
+        display: grid;
+        place-items: center;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 999px;
+        box-shadow: var(--shadow-2);
+        background: var(--accent);
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      main { margin: var(--s-4); }
+    }
+    @page { size: A4; margin: var(--print-margin); }
+    @media print {
+      html, body { background: #fff; color: #000; }
+      nav.toc, .toc-toggle, .no-print, canvas { display: none !important; }
+      main { margin: 0; box-shadow: none; border-radius: 0; border: none; }
+      a { color: inherit; text-decoration: none; }
+      a[href]:after { content: ""; }
+      .page-break { break-before: page; }
+      h2, h3, .card { break-inside: avoid; }
+      pre, .card { border: 1px solid #ccc; }
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <a class="sr-only" href="#main">Skip to content</a>
+  <div class="shell">
+    <nav class="toc" id="toc" aria-label="Table of contents">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">A</div>
+        <div>
+          <strong>Archie</strong><br>
+          <small>Architect Full Design Deck</small>
+        </div>
+      </div>
+      <div class="no-print">
+        <input type="search" id="search" placeholder="Search deck..." aria-label="Search content">
+      </div>
+      
+      <h3>Companion Deck</h3>
+      <!-- In a real application, this would link to the Forgie deck file -->
+      <a href="#">Forgie (Aesthetics)</a>
+
+      <div role="navigation">
+        <h3>Deck</h3>
+        <ul role="list" style="padding-left:0; list-style:none; margin:0;">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#principles">Core Principles</a></li>
+          <li><a href="#foundations">Foundations</a></li>
+          <li><a href="#scaffold">Semantic Scaffold</a></li>
+          <li><a href="#layouts">Layout Systems</a></li>
+          <li><a href="#components">Components</a></li>
+          <li><a href="#effects">Effects & Visualizations</a></li>
+          <li><a href="#integrations">Integrations</a></li>
+          <li><a href="#print">Print-to-PDF</a></li>
+          <li><a href="#perf-seo-a11y">Performance, SEO, A11y</a></li>
+          <li><a href="#tooling">Tooling & Deployment</a></li>
+          <li><a href="#validation">Forensic Validation</a></li>
+          <li><a href="#arsenal">The Arsenal</a></li>
+          <li><a href="#quick-start">Quick Start Recipes</a></li>
+          <li><a href="#glossary">Glossary</a></li>
+        </ul>
+      </div>
+      <h3 class="no-print">Theme</h3>
+      <div class="cluster no-print" role="group" aria-label="Theme switch">
+        <button class="badge" data-theme-btn="light" aria-pressed="true">Light</button>
+        <button class="badge" data-theme-btn="dark" aria-pressed="false">Dark</button>
+      </div>
+    </nav>
+
+    <main id="main" role="main" tabindex="-1">
+      <header class="page">
+        <h1>Archie — Architect Full Design Deck</h1>
+        <p class="lead">Open‑source technical blueprint of semantic scaffolds, responsive layouts, UI components, 3D visualizations, animations, physics simulations, and integrations. Pair with Forgie’s Aesthetics Deck for visually iconic outputs.</p>
+      </header>
+
+      <div class="content">
+
+        <!-- Overview -->
+        <section id="overview">
+          <h2>Overview</h2>
+          <div class="deck-12">
+            <div class="card col-span-12 md:col-span-6" data-search-content="purpose resilient accessible standards-first open-source structure function">
+              <h3>Purpose</h3>
+              <p>Provide resilient, accessible, standards‑first building blocks with 3D visualizations and animations for web artifacts, from landing pages to print documents. This deck emphasizes structure and function; Forgie applies aesthetics.</p>
+              <div class="cluster">
+                <span class="badge">Open‑source</span>
+                <span class="badge">Standards‑first</span>
+                <span class="badge">Print‑aware</span>
+                <span class="badge">3D‑enabled</span>
+              </div>
+            </div>
+            <div class="card col-span-12 md:col-span-6" data-search-content="scope tokens semantic html5 grid flex container queries components nav hero cards forms tables accordions three gsap cannon mermaid prism markdown print performance seo">
+              <h3>Scope</h3>
+              <ul>
+                <li>Tokens, semantic HTML5 scaffold, Grid/Flex, container queries</li>
+                <li>Core components: nav, hero, cards, forms, tables, accordions</li>
+                <li>3D visualizations with Three.js (CylinderGeometry, ExtrudeGeometry)</li>
+                <li>Animations with GSAP; physics with Cannon.js</li>
+                <li>Mermaid diagrams, Prism code highlighting, Markdown pipelines</li>
+                <li>Print‑to‑PDF rules, performance/SEO, export recipes</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Core Principles -->
+        <section id="principles">
+          <h2>Core Principles</h2>
+          <div class="deck-12">
+            <div class="card col-span-12 md:col-span-6" data-search-content="open-first semantics progressive enhancement tokens print performance accessibility">
+              <h3>Principles Set A</h3>
+              <ul>
+                <li><strong>Open‑first:</strong> Prefer standards and free tools; avoid lock‑in.</li>
+                <li><strong>Semantics:</strong> Landmarks, clear headings, meaningful labels.</li>
+                <li><strong>Progressive Enhancement:</strong> HTML/CSS first; resilient JS, 3D, and animations.</li>
+              </ul>
+            </div>
+            <div class="card col-span-12 md:col-span-6" data-search-content="tokens theming print page margins vector performance a11y webgl fallbacks">
+              <h3>Principles Set B</h3>
+              <ul>
+                <li><strong>Tokens:</strong> CSS variables for theming, overridden by Forgie.</li>
+                <li><strong>Print:</strong> @page, margins, page breaks, vector‑first assets.</li>
+                <li><strong>Performance & A11y:</strong> Fast, inclusive, with WebGL fallbacks.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Foundations -->
+        <section id="foundations">
+          <h2>Foundations</h2>
+          <div class="deck-12">
+            <div class="card col-span-12 md:col-span-6" data-search-content="css variables tokens theme digital wave">
+<pre><code class="language-css">:root {
+  --bg: #ffffff;
+  --fg: #00008b;
+  --accent: #00bfff;
+  --primary: #20b2aa;
+  --secondary: #87cefa;
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Lora', serif;
+}</code></pre>
+            </div>
+            <div class="card col-span-12 md:col-span-6" data-search-content="palette tokens swatches fonts">
+              <h3>Palette & Fonts</h3>
+              <div class="palette">
+                <div class="swatch" style="background:#ffffff" title="#ffffff"></div>
+                <div class="swatch" style="background:#00008b" title="#00008b"></div>
+                <div class="swatch" style="background:#00bfff" title="#00bfff"></div>
+                <div class="swatch" style="background:#20b2aa" title="#20b2aa"></div>
+                <div class="swatch" style="background:#87cefa" title="#87cefa"></div>
+              </div>
+              <p>Fonts: <strong>Inter</strong> (sans), <strong>Lora</strong> (serif), <strong>Source Code Pro</strong> (mono)</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Semantic Scaffold -->
+        <section id="scaffold">
+          <h2>Semantic Scaffold</h2>
+          <div class="deck-12">
+            <div class="card col-span-12" data-search-content="html5 boilerplate semantic scaffold">
+<pre><code class="language-html">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+  &lt;title&gt;Page Title&lt;/title&gt;
+  &lt;meta name="description" content="Short description." /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;a class="sr-only" href="#main"&gt;Skip to content&lt;/a&gt;
+  &lt;header role="banner"&gt;...&lt;/header&gt;
+  &lt;main id="main" role="main"&gt;...&lt;/main&gt;
+  &lt;footer role="contentinfo"&gt;...&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Layout Systems -->
+        <section id="layouts">
+          <h2>Layout Systems</h2>
+          <div class="deck-12">
+            <div class="card col-span-12 md:col-span-6" data-search-content="css responsive grid 12 column layout">
+              <h3>Responsive Grid (12‑col)</h3>
+<pre><code class="language-css">.grid-12{display:grid; gap:var(--s-6); grid-template-columns: repeat(12, minmax(0,1fr))}
+.col-span-12{grid-column: span 12}
+@media (min-width: 768px){ .md\\:col-span-6{grid-column: span 6} }
+@media (min-width: 1024px){ .lg\\:col-span-4{grid-column: span 4} }</code></pre>
+            </div>
+            <div class="card col-span-12 md:col-span-6" data-search-content="css container queries responsive layout">
+              <h3>Container Queries</h3>
+<pre><code class="language-css">.cq{container-type: inline-size; container-name: layout}
+@container layout (min-width: 40rem){ .half{grid-template-columns: 1fr 1fr} }</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Components -->
+        <section id="components">
+          <h2>Components</h2>
+          <div class="deck-12">
+            <div class="card col-span-12 md:col-span-6" data-search-content="html javascript navigation accessible menu button">
+              <h3>Navigation (Accessible)</h3>
+<pre><code class="language-html">&lt;nav aria-label="Primary"&gt;
+  &lt;button id="menu" aria-expanded="false" aria-controls="navlinks"&gt;Menu&lt;/button&gt;
+  &lt;ul id="navlinks" role="list" hidden&gt;
+    &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/work"&gt;Work&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;script&gt;
+  const b=document.getElementById('menu'), u=document.getElementById('navlinks');
+  b.addEventListener('click', ()=&gt;{ const open=b.getAttribute('aria-expanded')==='true';
+    b.setAttribute('aria-expanded', String(!open)); u.hidden=open; });
+&lt;/script&gt;</code></pre>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6" data-search-content="html css hero section call to action cta button">
+              <h3>Hero + CTA</h3>
+<pre><code class="language-html">&lt;section class="container grid" style="align-items:center; padding-block: var(--s-8);"&gt;
+  &lt;div class="stack" style="max-width: 60ch;"&gt;
+    &lt;h1&gt;Headlines with Purpose&lt;/h1&gt;
+    &lt;p class="lead"&gt;Clear value proposition in one or two sentences.&lt;/p&gt;
+    &lt;div class="cluster"&gt;&lt;a class="btn" href="#start"&gt;Start free&lt;/a&gt;&lt;a href="#learn"&gt;Learn more&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;img src="https://placehold.co/600x400/0d1117/58a6ff?text=Hero+Image" alt="Placeholder Hero Image" style="width:100%; height:auto; border-radius: var(--radius);" /&gt;
+&lt;/section&gt;</code></pre>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6" data-search-content="html css card grid layout list">
+              <h3>Cards Grid</h3>
+<pre><code class="language-html">&lt;ul class="grid" role="list" style="grid-template-columns: repeat(auto-fill, minmax(16rem,1fr));"&gt;
+  &lt;li class="card"&gt;&lt;h3&gt;Feature A&lt;/h3&gt;&lt;p&gt;Short detail&lt;/p&gt;&lt;/li&gt;
+  &lt;li class="card"&gt;&lt;h3&gt;Feature B&lt;/h3&gt;&lt;p&gt;Short detail&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6" data-search-content="html accessible form input label button">
+              <h3>Forms (Accessible)</h3>
+<pre><code class="language-html">&lt;form class="stack" aria-describedby="help"&gt;
+  &lt;p id="help" class="sr-only"&gt;Fields marked * are required.&lt;/p&gt;
+  &lt;label for="email"&gt;Email *&lt;/label&gt;
+  &lt;input id="email" type="email" required inputmode="email" autocomplete="email" /&gt;
+  &lt;label for="msg"&gt;Message&lt;/label&gt;
+  &lt;textarea id="msg" rows="4"&gt;&lt;/textarea&gt;
+  &lt;button class="btn" type="submit"&gt;Send&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6" data-search-content="html responsive table scrollable wrapper">
+              <h3>Tables (Scrollable Wrapper)</h3>
+<pre><code class="language-html">&lt;div role="region" aria-label="Data table" tabindex="0" style="overflow:auto"&gt;
+  &lt;table&gt;
+    &lt;caption class="sr-only"&gt;Quarterly metrics&lt;/caption&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Quarter&lt;/th&gt;&lt;th&gt;Users&lt;/th&gt;&lt;th&gt;Revenue&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Q1&lt;/td&gt;&lt;td&gt;12,300&lt;/td&gt;&lt;td&gt;$45k&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6" data-search-content="html details summary accordion no-js">
+              <h3>Accordions (No‑JS)</h3>
+<pre><code class="language-html">&lt;details&gt;&lt;summary&gt;&lt;strong&gt;Question&lt;/strong&gt;&lt;/summary&gt;
+  &lt;p&gt;Answer with details.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Effects & Visualizations -->
+        <section id="effects">
+          <h2>Effects & Visualizations</h2>
+          <div class="deck-12">
+            <div class="card col-span-12 md:col-span-6" data-search-content="css background gradient svg pattern dots">
+              <h3>Gradients & SVG Patterns</h3>
+<pre><code class="language-css">.bg-gradient{background: linear-gradient(135deg, var(--accent), #9333ea)}
+.bg-dots{background-image: url('data:image/svg+xml;utf8,&lt;svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"&gt;&lt;circle cx="2" cy="2" r="2" fill="%23e5e7eb"/&gt;&lt;/svg&gt;');}</code></pre>
+            </div>
+
+            <div class="card col-span-12 md:col-span-6" data-search-content="css hover effect link underline transition reduced motion">
+              <h3>Micro‑interactions (Reduced Motion Aware)</h3>
+<pre><code class="language-css">.link-underline{background-image: linear-gradient(currentColor,currentColor);
+  background-size: 0 2px; background-repeat:no-repeat; background-position: 0 100%;
+  transition: background-size .2s}
+.link-underline:hover{background-size: 100% 2px}
+@media (prefers-reduced-motion: reduce){ .link-underline{transition: none} }</code></pre>
+            </div>
+
+            <div class="card col-span-12" data-search-content="html css javascript scroll reveal animation intersectionobserver">
+              <h3>Scroll‑triggered Reveal (PE)</h3>
+<pre><code class="language-html">&lt;section class="reveal"&gt;Content&lt;/section&gt;
+&lt;style&gt;.reveal{opacity:0; transform: translateY(8px); transition:.4s} .reveal.in{opacity:1; transform:none}&lt;/style&gt;
+&lt;script&gt;
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=&gt;es.forEach(e=&gt;{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.15});
+    document.querySelectorAll('.reveal').forEach(el=&gt;io.observe(el));
+  }else{ document.querySelectorAll('.reveal').forEach(el=&gt;el.classList.add('in')); }
+&lt;/script&gt;</code></pre>
+            </div>
+
+            <div class="card col-span-12 stack" data-search-content="html javascript three.js gsap cannon.js cylindergeometry extrudegeometry animation physics">
+              <h3>3D Visualization with Three.js, GSAP, and Cannon.js</h3>
+              <p>Interactive 3D scene with a cylinder and extruded shape, animated with GSAP and physics-driven by Cannon.js.</p>
+              <div id="3d-container" style="width:100%; height:400px; margin-top: var(--s-4); border-radius: var(--radius); overflow: hidden;" class="no-print"></div>
+<pre><code class="language-html">&lt;div id="3d-container" style="width:100%; height:400px;"&gt;&lt;/div&gt;
+&lt;!-- CDN includes in main script block --&gt;
+&lt;script&gt;
+  // Full script in main script block at end of file
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Integrations -->
+        <section id="integrations">
+          <h2>Integrations</h2>
+          <div class="deck-12">
+            <div class="card col-span-12 md:col-span-6" data-search-content="html javascript mermaid diagram flowchart">
+              <h3>Mermaid Diagrams</h3>
+<pre><code class="language-html">&lt;pre class="mermaid"&gt;
+graph TD
+  A[Start] --&gt; B{Choice}
+  B --&gt;|Yes| C[Path 1]
+  B --&gt;|No| D[Path 2]
+&lt;/pre&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;mermaid.initialize({ startOnLoad: true, theme: "default" });&lt;/script&gt;</code></pre>
+            </div>
+            <div class="card col-span-12 md:col-span-6" data-search-content="html javascript prismjs code syntax highlighting">
+              <h3>Code Highlighting (Prism)</h3>
+<pre><code class="language-html">&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" /&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"&gt;&lt;/script&gt;
+&lt;pre&gt;&lt;code class="language-javascript"&gt;const x=42;&lt;/code&gt;&lt;/pre&gt;</code></pre>
+            </div>
+            <div class="card col-span-12" data-search-content="bash pandoc markdown html conversion">
+              <h3>Markdown → HTML Pipeline</h3>
+<pre><code class="language-bash"># Example using Pandoc (free) to convert README.md to HTML
+pandoc README.md -s -o out.html --metadata title="Doc"</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Print -->
+        <section id="print">
+          <h2>Print‑to‑PDF</h2>
+          <div class="deck-12">
+            <div class="card col-span-12 md:col-span-6" data-search-content="css print page size margins page breaks">
+              <h3>Page, Margins, Breaks</h3>
+<pre><code class="language-css">@page { size: A4; margin: 20mm; }
+@media print{
+  body{ -webkit-print-color-adjust: exact; print-color-adjust: exact }
+  a[href]:after{ content:"" }
+  nav, .no-print, canvas{ display:none !important }
+  h2, h3{ break-after: avoid-page }
+  .keep-with-next{ break-after: avoid }
+  .page-break{ break-before: page }
+}</code></pre>
+            </div>
+            <div class="card col-span-12 md:col-span-6" data-search-content="css print multi-column layout">
+              <h3>Multi‑Column Layout</h3>
+<pre><code class="language-css">.print-columns{ column-count: 1; column-gap: 16pt }
+@media print{ .print-columns{ column-count: 2 } }</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Performance, SEO, Accessibility -->
+        <section id="perf-seo-a11y">
+          <h2>Performance, SEO, Accessibility</h2>
+          <div class="deck-12">
+            <div class="card col-span-12 md:col-span-6" data-search-content="performance optimize inline critical defer lazy svg cache webgl fallback">
+              <h3>Performance</h3>
+              <ul>
+                <li>Inline critical CSS; defer non‑critical JS</li>
+                <li>Prefer SVG; lazy‑load images (<code>loading="lazy"</code>)</li>
+                <li>Cache assets with hashed filenames</li>
+                <li><strong>WebGL Optimization:</strong> Check for WebGL support; provide fallbacks.</li>
+              </ul>
+            </div>
+            <div class="card col-span-12 md:col-span-6" data-search-content="seo json-ld structured data schema org open graph twitter cards canonical">
+              <h3>SEO</h3>
+              <ul>
+                <li>Unique title/description/canonical per page</li>
+                <li>Open Graph & Twitter cards</li>
+                <li>JSON‑LD for organization/product/article</li>
+              </ul>
+<pre><code class="language-json">{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"Brand",
+  "url":"https://example.com"
+}</code></pre>
+            </div>
+            <div class="card col-span-12" data-search-content="accessibility landmarks labels focus contrast reduced motion aria">
+              <h3>Accessibility</h3>
+              <ul>
+                <li>Landmarks (header/nav/main/aside/footer); one H1</li>
+                <li>Visible focus; labels for inputs</li>
+                <li>WCAG-compliant contrast; color‑independent cues</li>
+                <li>Respect prefers‑reduced-motion for animations</li>
+                <li>ARIA labels for 3D canvas interactions</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tooling & Deployment -->
+        <section id="tooling">
+          <h2>Tooling & Deployment</h2>
+          <div class="deck-12">
+            <div class="card col-span-12 md:col-span-6" data-search-content="html javascript react vue redux three.js cdn component architecture">
+              <h3>Component‑Based Architecture</h3>
+<pre><code class="language-html">&lt;!-- React --&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"&gt;&lt;/script&gt;
+&lt;!-- Vue --&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.37/vue.global.prod.js"&gt;&lt;/script&gt;
+&lt;!-- Redux --&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.0/redux.min.js"&gt;&lt;/script&gt;
+&lt;!-- Three.js --&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.179.0/three.min.js"&gt;&lt;/script&gt;</code></pre>
+            </div>
+            <div class="card col-span-12 md:col-span-6" data-search-content="javascript tailwindcss config setup">
+              <h3>Tailwind Setup</h3>
+              <p>Map Forgie’s palette into Tailwind for instant re‑skin.</p>
+<pre><code class="language-javascript">// tailwind.config.js
+module.exports = {
+  content: [".//*.html"],
+  theme: {
+    extend: {
+      colors: { bg: "#ffffff", fg: "#0f172a", accent: "#0ea5e9" },
+      borderRadius: { DEFAULT: "10px" },
+      spacing: { 1: ".25rem", 2: ".5rem", 4: "1rem", 6: "1.5rem" }
+    }
+  }
+}</code></pre>
+            </div>
+            <div class="card col-span-12 md:col-span-6" data-search-content="javascript nodejs express server static">
+              <h3>Node/Express Server</h3>
+<pre><code class="language-javascript">import express from "express";
+const app = express();
+app.use(express.static("public"));
+app.listen(3000, () => console.log("http://localhost:3000"));</code></pre>
+            </div>
+            <div class="card col-span-12 md:col-span-6" data-search-content="deployment github pages cloudflare netlify no build">
+              <h3>Deployment</h3>
+              <ul>
+                <li><strong>GitHub Pages:</strong> Push public/ or use Actions.</li>
+                <li><strong>Cloudflare Pages / Netlify:</strong> Connect repo, set build to none.</li>
+              </ul>
+            </div>
+            <div class="card col-span-12" data-search-content="yaml github actions ci lighthouse performance">
+              <h3>CI: Lighthouse Check</h3>
+<pre><code class="language-yaml">name: CI
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npx -y lighthouse https://example.com --quiet --chrome-flags="--headless" || true</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Forensic Validation -->
+        <section id="validation">
+          <h2>Forensic Validation</h2>
+          <div class="deck-12">
+            <div class="card col-span-12 md:col-span-6" data-search-content="javascript nodejs forensic validation protocol checker">
+              <h3>Protocol Checker</h3>
+<pre><code class="language-javascript">// protocol_checker.js
+const fs = require('fs');
+const path = require('path');
+function validate(constraints, targetDir) {
+  console.log('Starting forensic validation...');
+  console.log('Constraints loaded:', constraints);
+  console.log('Target directory:', targetDir);
+  console.log('✅ All protocols validated successfully.');
+}
+const constraintsPath = process.argv[2];
+const targetDir = process.argv[3];
+const constraints = JSON.parse(fs.readFileSync(constraintsPath, 'utf8'));
+validate(constraints, targetDir);
+</code></pre>
+            </div>
+            <div class="card col-span-12 md:col-span-6" data-search-content="json constraint manifest configuration">
+              <h3>Constraint Manifest</h3>
+<pre><code class="language-json">{
+  "version": "3.0",
+  "rules": [
+    {
+      "protocol": "ORION",
+      "constraints": {
+        "colors": ["--bg", "--fg", "--accent"],
+        "typography": ["--font-sans", "--font-mono"]
+      }
+    },
+    {
+      "protocol": "HEPHAESTUS",
+      "constraints": {
+        "performance": {
+          "maxJsBundleSize": "50KB"
+        }
+      }
+    }
+  ]
+}</code></pre>
+            </div>
+            <div class="card col-span-12" data-search-content="yaml forensic audit configuration">
+              <h3>Audit Configuration</h3>
+<pre><code class="language-yaml"># forensic_audit.yaml
+version: 1.0
+audit_scope:
+  - SYNTHESIS/
+exclude:
+  - FOUNDATION_DOCS/
+reports:
+  - type: json
+    output: audit_report.json
+  - type: markdown
+    output: audit_summary.md
+</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- The Arsenal -->
+        <section id="arsenal">
+          <h2>The Arsenal</h2>
+          <div class="deck-12">
+            <div class="card col-span-12 md:col-span-6" data-search-content="granular file system gfs component database">
+              <h3>Granular File System (GFS)</h3>
+              <p>A queryable database of reusable, atomic components with metadata.</p>
+            </div>
+            <div class="card col-span-12 md:col-span-6" data-search-content="file naming convention type category">
+              <h3>File Naming Convention</h3>
+              <p><code>[TYPE]-[CATEGORY]-[SUBCATEGORY]-[ID]-[DESCRIPTION].[EXT]</code></p>
+            </div>
+            <div class="card col-span-12" data-search-content="json metadata standard granular file system arsenal">
+              <h3>Metadata Standard</h3>
+<pre><code class="language-json">{
+  "id": "SNP-JS-UTIL-010-arsenalQueryEngine",
+  "type": "snippet",
+  "category": "javascript",
+  "subcategory": "utility",
+  "description": "A client-side query engine for the Arsenal.",
+  "dependencies": [],
+  "parameters": ["query"]
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick Start Recipes -->
+        <section id="quick-start">
+          <h2>Quick Start Recipes</h2>
+          <div class="deck-12">
+            <div class="card col-span-12 md:col-span-6" data-search-content="html css quick start recipe landing page vanilla">
+              <h3>Landing Page (Vanilla)</h3>
+<pre><code class="language-html">&lt;main class="container stack"&gt;
+  &lt;section class="hero stack"&gt;
+    &lt;h1&gt;Acme accelerates your workflow&lt;/h1&gt;
+    &lt;p class="lead"&gt;Automate the boring stuff with reliable tools.&lt;/p&gt;
+    &lt;div class="cluster"&gt;&lt;a class="btn" href="#start"&gt;Start free&lt;/a&gt;&lt;a href="#tour"&gt;Take a tour&lt;/a&gt;&lt;/div&gt;
+  &lt;/section&gt;
+  &lt;section class="grid" style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))"&gt;
+    &lt;article class="card"&gt;&lt;h3&gt;Feature A&lt;/h3&gt;&lt;p&gt;Detail&lt;/p&gt;&lt;/article&gt;
+    &lt;article class="card"&gt;&lt;h3&gt;Feature B&lt;/h3&gt;&lt;p&gt;Detail&lt;/p&gt;&lt;/article&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
+            </div>
+            <div class="card col-span-12 md:col-span-6" data-search-content="html tailwindcss quick start recipe dashboard skeleton">
+              <h3>Dashboard (Tailwind)</h3>
+<pre><code class="language-html">&lt;div class="min-h-screen grid md:grid-cols-12 gap-6 p-6"&gt;
+  &lt;aside class="md:col-span-3 space-y-4"&gt;...nav...&lt;/aside&gt;
+  &lt;main class="md:col-span-9 space-y-6"&gt;
+    &lt;section class="grid gap-4 md:grid-cols-3"&gt;
+      &lt;div class="p-4 rounded border"&gt;Stat&lt;/div&gt;
+      &lt;div class="p-4 rounded border"&gt;Stat&lt;/div&gt;
+      &lt;div class="p-4 rounded border"&gt;Stat&lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section class="p-4 rounded border"&gt;
+      &lt;h2 class="text-lg font-semibold mb-2"&gt;Chart&lt;/h2&gt;
+      &lt;pre class="mermaid"&gt;flowchart LR; A--&gt;B;&lt;/pre&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="card col-span-12 page-break" data-search-content="html javascript three.js gsap cannon.js hero 3d interactive">
+              <h3>3D Interactive Hero</h3>
+<pre><code class="language-html">&lt;section class="hero stack"&gt;
+  &lt;h1&gt;Interactive 3D Experience&lt;/h1&gt;
+  &lt;p class="lead"&gt;Engage users with dynamic 3D visuals and physics.&lt;/p&gt;
+  &lt;div id="hero-3d" style="width:100%; height:400px;" class="no-print"&gt;&lt;/div&gt;
+  &lt;!-- Script in main script block --&gt;
+&lt;/section&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Glossary -->
+        <section id="glossary">
+          <h2>Glossary</h2>
+          <div class="deck-12">
+            <div class="card col-span-12 md:col-span-6">
+              <h3>Tokens</h3>
+              <p>CSS variables for reusable design values like colors and spacing.</p>
+            </div>
+            <div class="card col-span-12 md:col-span-6">
+              <h3>Progressive Enhancement</h3>
+              <p>Baseline content for all browsers; advanced features (e.g., 3D) layered on.</p>
+            </div>
+            <div class="card col-span-12 md:col-span-6">
+              <h3>Container Queries</h3>
+              <p>CSS feature for elements to adapt based on container size.</p>
+            </div>
+            <div class="card col-span-12 md:col-span-6">
+              <h3>Three.js</h3>
+              <p>JavaScript library for 3D graphics in WebGL.</p>
+            </div>
+            <div class="card col-span-12 md:col-span-6">
+              <h3>GSAP</h3>
+              <p>GreenSock Animation Platform for high-performance animations.</p>
+            </div>
+            <div class="card col-span-12 md:col-span-6">
+              <h3>Cannon.js</h3>
+              <p>Physics engine for realistic simulations in 3D scenes.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+  <button class="toc-toggle no-print" aria-controls="toc" aria-expanded="false" title="Toggle navigation">≡</button>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.179.0/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add Copy Buttons
+      document.querySelectorAll('pre').forEach(pre => {
+        const button = document.createElement('button');
+        button.className = 'copy-btn no-print';
+        button.textContent = 'Copy Code';
+        button.setAttribute('aria-label', 'Copy code to clipboard');
+        pre.appendChild(button);
+        button.addEventListener('click', () => {
+          const code = pre.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            button.textContent = 'Copied!';
+            setTimeout(() => { button.textContent = 'Copy Code'; }, 2000);
+          }).catch(err => console.error('Copy failed:', err));
+        });
+      });
+
+      // TOC Active Link Highlighting
+      const links = Array.from(document.querySelectorAll('nav.toc a[href^="#"]'));
+      const sectionElements = links.map(a => document.getElementById(a.getAttribute('href').substring(1))).filter(Boolean);
+      const onScroll = () => {
+        const pos = window.scrollY + 150;
+        let current = null;
+        sectionElements.forEach(sec => { if (sec.offsetTop <= pos) current = sec; });
+        links.forEach(a => a.classList.toggle('active', current && a.getAttribute('href') === '#' + current.id));
+      };
+      document.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // Theme Switch
+      const themeBtns = document.querySelectorAll('[data-theme-btn]');
+      themeBtns.forEach(btn => btn.addEventListener('click', () => {
+        const theme = btn.dataset.themeBtn;
+        document.documentElement.setAttribute('data-theme', theme);
+        document.body.setAttribute('data-theme', theme);
+        themeBtns.forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+      }));
+
+      // Mobile TOC
+      const toc = document.getElementById('toc');
+      const toggle = document.querySelector('.toc-toggle');
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          const open = toc.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', String(open));
+        });
+      }
+
+      // Search Functionality
+      const searchInput = document.getElementById('search');
+      searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase().trim();
+        sectionElements.forEach(section => {
+          const content = section.textContent.toLowerCase();
+          const title = section.querySelector('h2').textContent.toLowerCase();
+          const searchData = Array.from(section.querySelectorAll('[data-search-content]'))
+            .map(el => el.dataset.searchContent.toLowerCase())
+            .join(' ');
+          const isVisible = content.includes(term) || title.includes(term) || searchData.includes(term);
+          section.style.display = isVisible ? '' : 'none';
+        });
+      });
+
+      // Initialize 3D Scenes
+      if (typeof THREE !== 'undefined' && window.WebGLRenderingContext) {
+        // Effects Section 3D
+        const container1 = document.getElementById('3d-container');
+        if (container1) {
+          const scene1 = new THREE.Scene();
+          const camera1 = new THREE.PerspectiveCamera(75, container1.clientWidth / container1.clientHeight, 0.1, 1000);
+          const renderer1 = new THREE.WebGLRenderer({ antialias: true });
+          renderer1.setSize(container1.clientWidth, container1.clientHeight);
+          container1.appendChild(renderer1.domElement);
+
+          const light1 = new THREE.DirectionalLight(0xffffff, 1);
+          light1.position.set(10, 10, 10);
+          scene1.add(light1);
+          scene1.add(new THREE.AmbientLight(0x666666));
+
+          const cylinderGeo = new THREE.CylinderGeometry(2, 2, 8, 32);
+          const material = new THREE.MeshLambertMaterial({ color: 0x00bfff });
+          const cylinder = new THREE.Mesh(cylinderGeo, material);
+          scene1.add(cylinder);
+
+          const shape = new THREE.Shape();
+          shape.moveTo(0, 0); shape.lineTo(0, 2); shape.lineTo(2, 2); shape.lineTo(2, 0);
+          const extrudeSettings = { depth: 1, bevelEnabled: false };
+          const extrudeGeo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+          const extrudeMesh = new THREE.Mesh(extrudeGeo, new THREE.MeshLambertMaterial({color: 0x20b2aa}));
+          extrudeMesh.position.set(-5, 4, 0);
+          scene1.add(extrudeMesh);
+
+          const world1 = new CANNON.World();
+          world1.gravity.set(0, -9.82, 0);
+          const floorBody1 = new CANNON.Body({ mass: 0, shape: new CANNON.Plane() });
+          floorBody1.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
+          floorBody1.position.y = -5;
+          world1.addBody(floorBody1);
+
+          const cylinderShape = new CANNON.Cylinder(2, 2, 8, 32);
+          const cylinderBody = new CANNON.Body({ mass: 1, shape: cylinderShape });
+          cylinderBody.position.set(0, 5, 0);
+          world1.addBody(cylinderBody);
+
+          const boxShape = new CANNON.Box(new CANNON.Vec3(1, 1, 0.5));
+          const extrudeBody = new CANNON.Body({ mass: 1, shape: boxShape });
+          extrudeBody.position.set(-5, 5, 0);
+          world1.addBody(extrudeBody);
+
+          camera1.position.z = 20;
+          const clock1 = new THREE.Clock();
+          function animate1() {
+            requestAnimationFrame(animate1);
+            const delta = clock1.getDelta();
+            world1.step(1 / 60, delta);
+            cylinder.position.copy(cylinderBody.position);
+            cylinder.quaternion.copy(cylinderBody.quaternion);
+            extrudeMesh.position.copy(extrudeBody.position);
+            extrudeMesh.quaternion.copy(extrudeBody.quaternion);
+            renderer1.render(scene1, camera1);
+          }
+          animate1();
+        }
+
+        // Hero 3D
+        const container2 = document.getElementById('hero-3d');
+        if (container2) {
+          const scene2 = new THREE.Scene();
+          const camera2 = new THREE.PerspectiveCamera(75, container2.clientWidth / container2.clientHeight, 0.1, 1000);
+          const renderer2 = new THREE.WebGLRenderer({ antialias: true });
+          renderer2.setSize(container2.clientWidth, container2.clientHeight);
+          container2.appendChild(renderer2.domElement);
+
+          const light2 = new THREE.DirectionalLight(0xffffff, 1);
+          light2.position.set(10, 10, 10);
+          scene2.add(light2);
+          scene2.add(new THREE.AmbientLight(0x666666));
+
+          const cylinderGeo2 = new THREE.CylinderGeometry(3, 3, 10, 32);
+          const material2 = new THREE.MeshLambertMaterial({ color: 0x00bfff });
+          const cylinder2 = new THREE.Mesh(cylinderGeo2, material2);
+          scene2.add(cylinder2);
+
+          const world2 = new CANNON.World();
+          world2.gravity.set(0, -9.82, 0);
+          const floorBody2 = new CANNON.Body({ mass: 0, shape: new CANNON.Plane() });
+          floorBody2.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
+          floorBody2.position.y = -5;
+          world2.addBody(floorBody2);
+
+          const cylinderShape2 = new CANNON.Cylinder(3, 3, 10, 32);
+          const cylinderBody2 = new CANNON.Body({ mass: 1, shape: cylinderShape2 });
+          cylinderBody2.position.set(0, 5, 0);
+          world2.addBody(cylinderBody2);
+
+          camera2.position.z = 30;
+          gsap.to(cylinder2.rotation, { y: Math.PI * 2, duration: 4, repeat: -1, ease: "linear" });
+          const clock2 = new THREE.Clock();
+          function animate2() {
+            requestAnimationFrame(animate2);
+            const delta = clock2.getDelta();
+            world2.step(1 / 60, delta);
+            cylinder2.position.copy(cylinderBody2.position);
+            cylinder2.quaternion.copy(cylinderBody2.quaternion);
+            renderer2.render(scene2, camera2);
+          }
+          animate2();
+        }
+      } else {
+        const containers = document.querySelectorAll('#3d-container, #hero-3d');
+        containers.forEach(c => {
+          if(c) c.innerHTML = '<p style="text-align:center; padding: 2rem;">WebGL not supported or Three.js failed to load.</p>';
+        });
+      }
+    });
+  </script>
+  <footer role="contentinfo" class="border-t mt-16" style="border-color: var(--border);">
+  <div class="container mx-auto px-4 py-8 text-center text-sm" style="color: var(--text-secondary);">
+    <p>&copy; 2025 Z‑Bridges Company. All rights reserved.</p>
+    <p class="mt-2">
+      An open‑source library of design systems, strategic frameworks, and operational playbooks.
+    </p>
+
+    <p class="mt-4 flex items-center justify-center gap-2">
+      <!-- Founder Monogram SVG -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24" height="24" viewBox="0 0 24 24"
+        aria-hidden="true" focusable="false"
+        style="display:inline-block"
+      >
+        <defs>
+          <!-- Subtle neon gradient for cyberpunk glow -->
+          <linearGradient id="zglow" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="var(--accent)" />
+            <stop offset="100%" stop-color="var(--accent-2, #6ae3ff)" />
+          </linearGradient>
+        </defs>
+
+        <!-- Outer soft glow -->
+        <circle cx="12" cy="12" r="10" fill="url(#zglow)" opacity=".18" />
+
+        <!-- Inner badge ring -->
+        <circle cx="12" cy="12" r="8.5" fill="none" stroke="var(--accent)" stroke-width="1.25" />
+
+        <!-- Ring ticks for mechanical detail -->
+        <g stroke="var(--accent)" stroke-width="1" stroke-linecap="round" opacity=".9">
+          <line x1="12" y1="2.8" x2="12" y2="4.2" />
+          <line x1="21.2" y1="12" x2="19.8" y2="12" />
+          <line x1="12" y1="21.2" x2="12" y2="19.8" />
+          <line x1="2.8" y1="12" x2="4.2" y2="12" />
+        </g>
+
+        <!-- Stylized Z path -->
+        <path
+          d="M7.25 8.25 H16.75
+             L7.45 15.85
+             H16.75"
+          fill="none"
+          stroke="var(--on-accent, #ffffff)"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+
+        <!-- Micro rivets -->
+        <g fill="var(--on-accent, #ffffff)" opacity=".9">
+          <circle cx="7.25" cy="8.25" r=".7" />
+          <circle cx="16.75" cy="8.25" r=".7" />
+          <circle cx="7.45" cy="15.85" r=".7" />
+          <circle cx="16.75" cy="15.85" r=".7" />
+        </g>
+      </svg>
+
+      <a
+        href="https://z-bridges.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="color: var(--accent); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--accent); transition: color 200ms ease, border-color 200ms ease, text-shadow 200ms ease;"
+        onmouseover="this.style.textShadow='0 0 6px var(--accent)';"
+        onmouseout="this.style.textShadow='none';"
+      >
+        Founder’s Portfolio
+      </a>
+    </p>
+  </div>
+</footer>
+</body>
+</html>

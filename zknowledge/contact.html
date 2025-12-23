@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your Vision | zLibrary</title>
+    
+    <!-- Favicons -->
+    <link rel="icon" href="https://z-bridges.com/zknowledge/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://z-bridges.com/zknowledge/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://z-bridges.com/zknowledge/favicon.png">
+
+    <meta name="description" content="Commission Z-Bridges to streamline operations, implement strategic AI, and forge bespoke digital systems.">
+
+    <!-- Fonts & Styles -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* FORGIE: Using CSS variables from the established brand kit for consistency */
+      :root {
+        --bg-main: #f5f5dc;
+        --text-primary: #2c3e50;
+        --text-secondary: #475569;
+        --accent: #556b2f;
+        --border: #cccccc;
+        --card: #ffffff;
+        --font-sans: "Inter", system-ui, sans-serif;
+        --font-serif: "Source Serif 4", Georgia, serif;
+      }
+      body {
+        font-family: var(--font-sans);
+        background-color: var(--bg-main);
+        color: var(--text-primary);
+      }
+      .fade-in {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Z-Bridges",
+      "url": "https://z-bridges.com/zknowledge/",
+      "logo": "https://z-bridges.com/zknowledge/zKnowledgelogo.png"
+    }
+    </script>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4">
+        <!-- ARCHIE: Reusable Header Component -->
+        <header role="banner" class="flex items-center justify-between py-4 border-b sticky top-0 bg-bg-main/80 backdrop-blur-sm z-50" style="border-color: var(--border);">
+            <a href="https://z-bridges.com/zknowledge/index.html">
+                <img src="https://z-bridges.com/zknowledge/zKnowledgelogo.png" alt="zLibrary Logo" class="h-14 w-auto">
+            </a>
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold">
+                <a href="https://z-bridges.com/zknowledge/corpus.html" class="flex items-center hover:text-accent transition-colors" style="color: var(--text-secondary);">The Corpus</a>
+                <a href="https://z-bridges.com/zknowledge/articles.html" class="flex items-center hover:text-accent transition-colors" style="color: var(--text-secondary);">Articles</a>
+                <a href="https://z-bridges.com/zknowledge/originals.html" class="flex items-center hover:text-accent transition-colors" style="color: var(--text-secondary);">Digital Originals</a>
+                <a href="https://z-bridges.com/zknowledge/login.html" class="flex items-center hover:text-accent transition-colors" style="color: var(--text-secondary);">Partner Login</a>
+            </nav>
+            <a href="https://z-bridges.com/zknowledge/contact.html" class="hidden md:inline-block text-white font-bold text-sm px-4 py-2 rounded-full hover:opacity-90 transition-opacity ring-2 ring-offset-2" style="background-color: var(--accent); ring-color: var(--accent);">
+                Build Your Vision
+            </a>
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-text-secondary hover:bg-gray-100"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg></button>
+        </header>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b p-4" style="border-color: var(--border);">
+            <a href="https://z-bridges.com/zknowledge/corpus.html" class="block py-2" style="color: var(--text-secondary);">The Corpus</a>
+            <a href="https://z-bridges.com/zknowledge/articles.html" class="block py-2" style="color: var(--text-secondary);">Articles</a>
+            <a href="https://z-bridges.com/zknowledge/originals.html" class="block py-2" style="color: var(--text-secondary);">Digital Originals</a>
+            <a href="https://z-bridges.com/zknowledge/login.html" class="block py-2" style="color: var(--text-secondary);">Partner Login</a>
+            <a href="https://z-bridges.com/zknowledge/contact.html" class="block mt-2 text-center text-white font-bold py-2 rounded-full hover:opacity-90" style="background-color: var(--accent);">Build Your Vision</a>
+        </div>
+
+        <main role="main" class="py-16 fade-in">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl md:text-5xl font-bold font-serif" style="color: var(--text-primary);">Commission Z-Bridges</h1>
+                    <p class="mt-4 text-lg" style="color: var(--text-secondary);">Present us with your chaos. We will provide the blueprint for your dominion.</p>
+                    
+                    <!-- ARCHIE'S NOTE: Strategically placed button to build trust and provide context about the founder before the user engages with the form. -->
+                    <a href="https://z-bridges.com" target="_blank" rel="noopener noreferrer" class="inline-block mt-6 text-sm font-bold px-6 py-2 rounded-full border-2 transition-colors duration-300 ease-in-out" style="color: var(--accent); border-color: var(--accent); hover:background-color: var(--accent); hover:color: white;">
+                        Meet the Architect
+                    </a>
+                </div>
+
+                <div class="rounded-lg p-8 border" style="background-color: var(--card); border-color: var(--border);">
+                    <form action="#" method="POST" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium" style="color: var(--text-secondary);">Full Name</label>
+                                <input type="text" id="name" name="name" required class="mt-1 block w-full px-3 py-2 bg-white border rounded-md text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1" style="border-color: var(--border); focus:ring-color: var(--accent); focus:border-color: var(--accent);">
+                            </div>
+                            <div>
+                                <label for="company" class="block text-sm font-medium" style="color: var(--text-secondary);">Company</label>
+                                <input type="text" id="company" name="company" class="mt-1 block w-full px-3 py-2 bg-white border rounded-md text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1" style="border-color: var(--border); focus:ring-color: var(--accent); focus:border-color: var(--accent);">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium" style="color: var(--text-secondary);">Email Address</label>
+                            <input type="email" id="email" name="email" required class="mt-1 block w-full px-3 py-2 bg-white border rounded-md text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1" style="border-color: var(--border); focus:ring-color: var(--accent); focus:border-color: var(--accent);">
+                        </div>
+                        <div>
+                            <label for="interest" class="block text-sm font-medium" style="color: var(--text-secondary);">Primary Interest</label>
+                            <select id="interest" name="interest" class="mt-1 block w-full px-3 py-2 bg-white border rounded-md text-sm shadow-sm focus:outline-none focus:ring-1" style="border-color: var(--border); focus:ring-color: var(--accent); focus:border-color: var(--accent);">
+                                <option>Streamlining Operations</option>
+                                <option>Strategic AI & Automation</option>
+                                <option>Bespoke Digital Systems</option>
+                                <option>Brand & Aesthetic Forging</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="description" class="block text-sm font-medium" style="color: var(--text-secondary);">Describe Your Chaos</label>
+                            <textarea id="description" name="description" rows="4" required class="mt-1 block w-full px-3 py-2 bg-white border rounded-md text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1" style="border-color: var(--border); focus:ring-color: var(--accent); focus:border-color: var(--accent);"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-sm font-bold text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: var(--accent); focus:ring-color: var(--accent);">
+                                Initiate Protocol
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+    <footer role="contentinfo" class="border-t mt-16" style="border-color: var(--border);">
+  <div class="container mx-auto px-4 py-8 text-center text-sm" style="color: var(--text-secondary);">
+    <p>&copy; 2025 Z‑Bridges Company. All rights reserved.</p>
+    <p class="mt-2">
+      An open‑source library of design systems, strategic frameworks, and operational playbooks.
+    </p>
+
+    <p class="mt-4 flex items-center justify-center gap-2">
+      <!-- Founder Monogram SVG -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24" height="24" viewBox="0 0 24 24"
+        aria-hidden="true" focusable="false"
+        style="display:inline-block"
+      >
+        <defs>
+          <!-- Subtle neon gradient for cyberpunk glow -->
+          <linearGradient id="zglow" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="var(--accent)" />
+            <stop offset="100%" stop-color="var(--accent-2, #6ae3ff)" />
+          </linearGradient>
+        </defs>
+
+        <!-- Outer soft glow -->
+        <circle cx="12" cy="12" r="10" fill="url(#zglow)" opacity=".18" />
+
+        <!-- Inner badge ring -->
+        <circle cx="12" cy="12" r="8.5" fill="none" stroke="var(--accent)" stroke-width="1.25" />
+
+        <!-- Ring ticks for mechanical detail -->
+        <g stroke="var(--accent)" stroke-width="1" stroke-linecap="round" opacity=".9">
+          <line x1="12" y1="2.8" x2="12" y2="4.2" />
+          <line x1="21.2" y1="12" x2="19.8" y2="12" />
+          <line x1="12" y1="21.2" x2="12" y2="19.8" />
+          <line x1="2.8" y1="12" x2="4.2" y2="12" />
+        </g>
+
+        <!-- Stylized Z path -->
+        <path
+          d="M7.25 8.25 H16.75
+             L7.45 15.85
+             H16.75"
+          fill="none"
+          stroke="var(--on-accent, #ffffff)"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+
+        <!-- Micro rivets -->
+        <g fill="var(--on-accent, #ffffff)" opacity=".9">
+          <circle cx="7.25" cy="8.25" r=".7" />
+          <circle cx="16.75" cy="8.25" r=".7" />
+          <circle cx="7.45" cy="15.85" r=".7" />
+          <circle cx="16.75" cy="15.85" r=".7" />
+        </g>
+      </svg>
+
+      <a
+        href="https://z-bridges.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="color: var(--accent); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--accent); transition: color 200ms ease, border-color 200ms ease, text-shadow 200ms ease;"
+        onmouseover="this.style.textShadow='0 0 6px var(--accent)';"
+        onmouseout="this.style.textShadow='none';"
+      >
+        Founder's Portfolio
+      </a>
+    </p>
+  </div>
+</footer>
+</body>
+</html>

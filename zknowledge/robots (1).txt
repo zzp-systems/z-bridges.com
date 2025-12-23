@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://knowledge.z-bridges.com/sitemap.xml
+Sitemap: https://knowledge.z-bridges.com/sitemap-images.xml
+
+# Disallow login pages from crawling
+Disallow: /login.html

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage Images -->
+  <url>
+    <loc>https://knowledge.z-bridges.com/</loc>
+    <image:image>
+      <image:loc>https://knowledge.z-bridges.com/zKnowledgelogo.webp</image:loc>
+      <image:title>Z-Bridges Knowledge Portal</image:title>
+      <image:caption>Official logo for Z-Bridges knowledge management system</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://knowledge.z-bridges.com/favicon.png</image:loc>
+      <image:title>Z-Bridges Favicon</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Article Images -->
+  <url>
+    <loc>https://knowledge.z-bridges.com/article-ai-collaboration.html</loc>
+    <image:image>
+      <image:loc>https://knowledge.z-bridges.com/ai-collaboration.webp</image:loc>
+      <image:title>AI Collaboration Framework</image:title>
+      <image:caption>Visualization of AI-human collaboration systems</image:caption>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://knowledge.z-bridges.com/article-bespoke-systems.html</loc>
+    <image:image>
+      <image:loc>https://knowledge.z-bridges.com/Bespoke.webp</image:loc>
+      <image:title>Bespoke Systems Development</image:title>
+      <image:caption>Custom software solutions and system architecture</image:caption>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://knowledge.z-bridges.com/article-brand-forging.html</loc>
+    <image:image>
+      <image:loc>https://knowledge.z-bridges.com/Brand-Forging.webp</image:loc>
+      <image:title>Brand Forging Process</image:title>
+      <image:caption>Strategic brand development and identity creation</image:caption>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://knowledge.z-bridges.com/article-streamlining-ops.html</loc>
+    <image:image>
+      <image:loc>https://knowledge.z-bridges.com/Streamlining-Operations.webp</image:loc>
+      <image:title>Operations Streamlining</image:title>
+      <image:caption>Efficiency optimization and process improvement</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- ZOF Product Images -->
+  <url>
+    <loc>https://knowledge.z-bridges.com/original-zof.html</loc>
+    <image:image>
+      <image:loc>https://knowledge.z-bridges.com/ZOF.webp</image:loc>
+      <image:title>ZOF System Architecture</image:title>
+      <image:caption>Complete ZOF framework and component overview</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://knowledge.z-bridges.com/4-P.webp</image:loc>
+      <image:title>4-P Framework Model</image:title>
+      <image:caption>Strategic 4-P methodology for system design</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://knowledge.z-bridges.com/Domains.webp</image:loc>
+      <image:title>Domain Structure</image:title>
+      <image:caption>Organizational domains and their relationships</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://knowledge.z-bridges.com/Bifurcated.webp</image:loc>
+      <image:title>Bifurcated System Flow</image:title>
+      <image:caption>Dual-path architecture for optimized processing</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://knowledge.z-bridges.com/HandoffBifurcated.webp</image:loc>
+      <image:title>Handoff Bifurcation Process</image:title>
+      <image:caption>Seamless transition between system components</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Z-BridgePay Product Images -->
+  <url>
+    <loc>https://knowledge.z-bridges.com/original-zpay.html</loc>
+    <image:image>
+      <image:loc>https://knowledge.z-bridges.com/Z-BridgePay.webp</image:loc>
+      <image:title>Z-BridgePay Payment System</image:title>
+      <image:caption>Secure and efficient payment processing platform</image:caption>
+    </image:image>
+  </url>
+</urlset>
