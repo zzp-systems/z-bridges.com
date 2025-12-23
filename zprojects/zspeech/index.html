@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Z-Speech Engine - Professional Text-to-Speech Interface">
+    
+    <title>Z-Speech Engine | Z-Bridges Co.</title>
+
+    <!-- Z-Bridges Typography Standards -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Lato:wght@300;400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Z-Bridges Design Tokens */
+            --z-bg: #0a0a0a;
+            --z-surface: #1a1a1a;
+            --z-surface-glass: rgba(26, 26, 26, 0.95);
+            --z-border: rgba(0, 224, 255, 0.2);
+            --z-cyan: #00e0ff;
+            --z-purple: #b300b3;
+            --z-text-main: #f8f9fa;
+            --z-text-muted: #a8a8a8;
+            --z-success: #00ff88;
+            --z-error: #ff4545;
+            --z-glow: 0 0 15px rgba(0, 224, 255, 0.15);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--z-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 224, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(179, 0, 179, 0.05) 0%, transparent 20%);
+            color: var(--z-text-main);
+            margin: 0;
+            padding-bottom: 140px; /* Space for fixed controls */
+            min-height: 100vh;
+        }
+
+        /* --- Header Architecture --- */
+        .z-header {
+            background: var(--z-surface-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--z-border);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .z-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .z-logo {
+            height: 40px;
+            width: auto;
+            filter: drop-shadow(0 0 5px rgba(0, 224, 255, 0.5));
+        }
+
+        .z-title h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            margin: 0;
+            line-height: 1;
+            background: linear-gradient(45deg, var(--z-cyan), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .z-subtitle {
+            font-size: 0.75rem;
+            color: var(--z-purple);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .z-progress {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--z-cyan);
+            margin-left: 10px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .z-progress.active { opacity: 1; }
+
+        /* --- Title Name Bar --- */
+        .z-title-bar {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: var(--z-surface-glass);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--z-border);
+            padding: 10px 20px;
+            z-index: 999;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .z-title-bar.visible {
+            transform: translateY(0);
+        }
+
+        .z-title-bar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .z-content-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            color: var(--z-cyan);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            max-width: 70%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .z-content-title:hover {
+            text-decoration: underline;
+            color: #fff;
+        }
+
+        .z-reading-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--z-text-muted);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--z-border);
+        }
+
+        /* --- Main Interface --- */
+        .z-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* Tab System */
+        .z-tabs {
+            display: flex;
+            gap: 2px;
+            background: var(--z-surface);
+            padding: 4px;
+            border-radius: 8px;
+            border: 1px solid var(--z-border);
+            margin-bottom: 20px;
+        }
+
+        .z-tab {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: none;
+            color: var(--z-text-muted);
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .z-tab.active {
+            background: rgba(0, 224, 255, 0.1);
+            color: var(--z-cyan);
+            box-shadow: inset 0 0 10px rgba(0, 224, 255, 0.05);
+        }
+
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Input Modules */
+        .z-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .z-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--z-border);
+            color: var(--z-text-main);
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .z-input:focus {
+            outline: none;
+            border-color: var(--z-cyan);
+            box-shadow: 0 0 15px rgba(0, 224, 255, 0.1);
+        }
+
+        .z-textarea {
+            min-height: 200px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        /* Action Buttons */
+        .z-btn {
+            background: transparent;
+            border: 1px solid var(--z-cyan);
+            color: var(--z-cyan);
+            padding: 10px 20px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .z-btn:hover:not(:disabled) {
+            background: var(--z-cyan);
+            color: var(--z-bg);
+            box-shadow: 0 0 15px rgba(0, 224, 255, 0.4);
+        }
+
+        .z-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            border-color: var(--z-text-muted);
+            color: var(--z-text-muted);
+        }
+
+        .z-btn-primary {
+            background: linear-gradient(135deg, rgba(0, 224, 255, 0.2), rgba(179, 0, 179, 0.2));
+            border: 1px solid var(--z-border);
+            color: #fff;
+        }
+
+        .z-btn-danger {
+            border-color: var(--z-error);
+            color: var(--z-error);
+        }
+        .z-btn-danger:hover:not(:disabled) {
+            background: var(--z-error);
+            color: white;
+        }
+
+        /* Content Display Area */
+        .z-reader-surface {
+            background: var(--z-surface);
+            border: 1px solid var(--z-border);
+            border-radius: 8px;
+            padding: 40px;
+            min-height: 400px;
+            position: relative;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
+            margin-top: 20px;
+        }
+
+        .z-paragraph {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #d1d5db;
+            transition: color 0.3s;
+        }
+
+        .z-sentence {
+            transition: all 0.3s ease;
+            padding: 2px 0;
+            border-radius: 2px;
+        }
+
+        .z-highlight {
+            background: rgba(0, 224, 255, 0.15);
+            color: var(--z-cyan);
+            padding: 2px 5px;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(0, 224, 255, 0.1);
+        }
+
+        /* Pop-up Configuration Box */
+        .z-popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .z-popup-overlay.active {
+            display: flex;
+        }
+
+        .z-popup-box {
+            background: var(--z-surface);
+            border: 1px solid var(--z-border);
+            border-radius: 12px;
+            padding: 25px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .z-popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--z-border);
+        }
+
+        .z-popup-header h3 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--z-cyan);
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .z-popup-close {
+            background: transparent;
+            border: none;
+            color: var(--z-text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+
+        .z-popup-close:hover {
+            color: var(--z-cyan);
+        }
+
+        /* Filter Group */
+        .z-filter-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .z-filter-btn {
+            flex: 1;
+            padding: 8px;
+            background: #000;
+            border: 1px solid var(--z-border);
+            color: var(--z-text-muted);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        .z-filter-btn.active {
+            background: var(--z-cyan);
+            color: #000;
+            font-weight: bold;
+        }
+
+        .z-slider-group { margin-bottom: 15px; }
+        .z-slider-group label {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Oswald', sans-serif;
+            color: var(--z-text-muted);
+            margin-bottom: 5px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 4px;
+            background: var(--z-border);
+            border-radius: 2px;
+            -webkit-appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--z-cyan);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--z-cyan);
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            background: #000;
+            border: 1px solid var(--z-border);
+            color: var(--z-text-main);
+            border-radius: 4px;
+        }
+
+        /* Visualizer */
+        .z-visualizer {
+            height: 40px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+        .bar { width: 3px; background: var(--z-cyan); animation: equalize 1s infinite; }
+        @keyframes equalize { 0% { height: 5px; } 50% { height: 20px; } 100% { height: 5px; } }
+
+        /* Sticky Footer Controls */
+        .z-footer-controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--z-surface-glass);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid var(--z-border);
+            padding: 15px 20px 25px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 2000;
+            box-shadow: 0 -5px 30px rgba(0,0,0,0.8);
+        }
+
+        .z-control-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .z-fab {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid var(--z-border);
+            background: var(--z-surface);
+            color: var(--z-text-main);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .z-fab:active { transform: scale(0.95); }
+        .z-fab.primary {
+            width: 64px;
+            height: 64px;
+            background: var(--z-cyan);
+            color: #000;
+            border: none;
+            box-shadow: 0 0 20px rgba(0, 224, 255, 0.4);
+            font-size: 1.5rem;
+        }
+        .z-fab:disabled {
+            background: #222;
+            color: #555;
+            border-color: #333;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        /* Selection Fab */
+        .z-selection-btn {
+            display: none;
+            background: var(--z-purple);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* Forensic Console */
+        .z-console {
+            background: #000;
+            border-top: 1px solid var(--z-border);
+            padding: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--z-text-muted);
+            height: 100px;
+            overflow-y: auto;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        .log-info { color: var(--z-cyan); }
+        .log-error { color: var(--z-error); }
+        .log-success { color: var(--z-success); }
+
+        @media (max-width: 768px) {
+            .z-reader-surface { padding: 20px; font-size: 1rem; }
+            .z-header { padding: 0.8rem; }
+            .z-logo { height: 30px; }
+            .z-title h1 { font-size: 1.2rem; }
+            .z-input-group { flex-direction: column; }
+            .z-title-bar { top: 70px; padding: 8px 15px; }
+            .z-title-bar-content { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .z-content-title { max-width: 100%; font-size: 0.9rem; }
+            .z-reading-time { align-self: flex-end; font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="z-header">
+        <div class="z-brand">
+            <a href="https://z-bridges.com" target="_blank">
+                <img src="https://zassets.z-bridges.com/zPhotos/Z-BridgesCo.png" alt="Z-Bridges Logo" class="z-logo">
+            </a>
+            <div class="z-title">
+                <h1>Z-Speech Engine</h1>
+                <div style="display: flex; gap: 10px; align-items: baseline;">
+                    <span class="z-subtitle">ICT Solutions</span>
+                    <span id="progressIndicator" class="z-progress">Para 0 of 0 | Sent 0 of 0</span>
+                </div>
+            </div>
+            <button class="z-btn" id="settingsToggle">
+                <i class="fas fa-sliders-h"></i> Audio Config
+            </button>
+        </div>
+    </header>
+
+    <!-- Title Name Bar -->
+    <div class="z-title-bar" id="titleBar">
+        <div class="z-title-bar-content">
+            <a id="contentTitle" class="z-content-title" href="#" target="_blank">
+                <i class="fas fa-link"></i>
+                <span id="titleText">No content loaded</span>
+            </a>
+            <div class="z-reading-time" id="readingTime">Reading Time: --</div>
+        </div>
+    </div>
+
+    <!-- Pop-up Configuration Box -->
+    <div class="z-popup-overlay" id="settingsOverlay">
+        <div class="z-popup-box">
+            <div class="z-popup-header">
+                <h3><i class="fas fa-sliders-h"></i> Audio Configuration</h3>
+                <button class="z-popup-close" id="closeSettings">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="z-slider-group">
+                <label><span>Voice Filter</span></label>
+                <div class="z-filter-group">
+                    <button class="z-filter-btn active" data-filter="all">All</button>
+                    <button class="z-filter-btn" data-filter="male">Male</button>
+                    <button class="z-filter-btn" data-filter="female">Female</button>
+                </div>
+            </div>
+
+            <div class="z-slider-group">
+                <label><span>Voice Model</span></label>
+                <select id="voiceSelect"></select>
+            </div>
+
+            <div class="z-slider-group">
+                <label><span>Playback Rate</span> <span id="rateValue">1.0x</span></label>
+                <input type="range" id="rateSlider" min="0.5" max="2.5" step="0.1" value="1">
+            </div>
+
+            <div class="z-slider-group">
+                <label><span>Pitch</span> <span id="pitchValue">1.0</span></label>
+                <input type="range" id="pitchSlider" min="0.5" max="2" step="0.1" value="1">
+            </div>
+
+            <div class="z-slider-group">
+                <label><span>Volume</span> <span id="volumeValue">100%</span></label>
+                <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
+            </div>
+
+            <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--z-border);">
+                <button class="z-btn" style="width: 100%;" id="applySettings">
+                    <i class="fas fa-check"></i> Apply Settings
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="z-container">
+        
+        <!-- Input Interface -->
+        <div class="z-tabs">
+            <button class="z-tab active" data-target="url-panel"><i class="fas fa-globe"></i> Web Resource</button>
+            <button class="z-tab" data-target="text-panel"><i class="fas fa-keyboard"></i> Direct Input</button>
+        </div>
+
+        <div id="url-panel" class="tab-content active">
+            <div class="z-input-group">
+                <input type="text" id="urlInput" class="z-input" placeholder="https://readnovelfull.com/novel/chapter-1">
+                <button class="z-btn z-btn-primary" id="fetchBtn" style="white-space: nowrap;">
+                    <i class="fas fa-satellite-dish"></i> Load URL
+                </button>
+            </div>
+        </div>
+
+        <div id="text-panel" class="tab-content">
+            <textarea id="textInput" class="z-input z-textarea" placeholder="Paste intelligence report or raw text data here..."></textarea>
+            <div style="text-align: right; margin-top: 10px;">
+                <button class="z-btn" id="loadTextBtn"><i class="fas fa-upload"></i> Process Text</button>
+                <button class="z-btn z-btn-danger" id="clearTextBtn"><i class="fas fa-trash"></i> Clear</button>
+            </div>
+        </div>
+
+        <!-- Visualizer -->
+        <div class="z-visualizer" id="visualizer">
+            <div class="bar" style="animation-delay: 0s"></div>
+            <div class="bar" style="animation-delay: 0.1s"></div>
+            <div class="bar" style="animation-delay: 0.2s"></div>
+            <div class="bar" style="animation-delay: 0.3s"></div>
+            <div class="bar" style="animation-delay: 0.4s"></div>
+            <div class="bar" style="animation-delay: 0.5s"></div>
+            <div class="bar" style="animation-delay: 0.6s"></div>
+            <div class="bar" style="animation-delay: 0.7s"></div>
+            <div class="bar" style="animation-delay: 0.8s"></div>
+            <div class="bar" style="animation-delay: 0.9s"></div>
+        </div>
+
+        <!-- Main Reader Surface -->
+        <div id="readerSurface" class="z-reader-surface">
+            <div style="text-align: center; color: var(--z-text-muted); padding-top: 100px;">
+                <i class="fas fa-microchip" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.5;"></i>
+                <p>Awaiting Data Injection...</p>
+            </div>
+        </div>
+
+        <!-- Console -->
+        <div class="z-console" id="consoleLog">
+            <div><span class="log-info">[SYSTEM]</span> Z-Speech Engine Pro v2.0 Initialized...</div>
+            <div><span class="log-info">[SYSTEM]</span> Wake Lock API: Ready</div>
+            <div><span class="log-info">[SYSTEM]</span> Title Bar System: Active</div>
+            <div><span class="log-info">[SYSTEM]</span> Pop-up Config Panel: Ready</div>
+        </div>
+
+    </div>
+
+    <!-- Footer Controls -->
+    <div class="z-footer-controls">
+        <!-- Floating Selection Action -->
+        <button id="readSelectionBtn" class="z-selection-btn">
+            <i class="fas fa-quote-right"></i> Read Selection
+        </button>
+
+        <!-- Main Controls -->
+        <div class="z-control-row">
+            <button class="z-fab" id="prevBtn" disabled><i class="fas fa-backward"></i></button>
+            <button class="z-fab primary" id="playPauseBtn" disabled><i class="fas fa-play"></i></button>
+            <button class="z-fab" id="stopBtn" disabled><i class="fas fa-stop"></i></button>
+            <button class="z-fab" id="nextBtn" disabled><i class="fas fa-forward"></i></button>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Z-Bridges ICT Division
+         * Project: Z-Speech Engine Pro v2.1
+         * Features: Title Bar, Pop-up Config, Auto-Scroll, Reading Time Calculator
+         * Paragraph-Based Navigation System
+         */
+        
+        const State = {
+            paragraphs: [],          // Array of paragraphs, each paragraph is array of sentences
+            currentPara: 0,          // Current paragraph index
+            currentSentence: 0,      // Current sentence index within paragraph
+            isReading: false,
+            isPaused: false,
+            utterance: null,
+            allVoices: [],
+            filteredVoices: [],
+            wakeLock: null,
+            config: {
+                rate: 1.0,
+                pitch: 1.0,
+                volume: 1.0,
+                voiceIndex: 0,
+                filter: 'all'
+            },
+            currentUrl: '',
+            currentTitle: '',
+            totalWords: 0,
+            readingTimeMinutes: 0
+        };
+
+        const UI = {
+            reader: document.getElementById('readerSurface'),
+            console: document.getElementById('consoleLog'),
+            playBtn: document.getElementById('playPauseBtn'),
+            stopBtn: document.getElementById('stopBtn'),
+            prevBtn: document.getElementById('prevBtn'),
+            nextBtn: document.getElementById('nextBtn'),
+            readSelBtn: document.getElementById('readSelectionBtn'),
+            voiceSelect: document.getElementById('voiceSelect'),
+            visualizer: document.getElementById('visualizer'),
+            settingsToggle: document.getElementById('settingsToggle'),
+            settingsOverlay: document.getElementById('settingsOverlay'),
+            closeSettings: document.getElementById('closeSettings'),
+            progress: document.getElementById('progressIndicator'),
+            titleBar: document.getElementById('titleBar'),
+            contentTitle: document.getElementById('contentTitle'),
+            titleText: document.getElementById('titleText'),
+            readingTime: document.getElementById('readingTime'),
+            urlInput: document.getElementById('urlInput'),
+            applySettings: document.getElementById('applySettings')
+        };
+
+        // --- Core Systems ---
+
+        function log(msg, type = 'info') {
+            const entry = document.createElement('div');
+            entry.innerHTML = `<span class="log-${type}">[${new Date().toLocaleTimeString('en-US',{hour12:false})}]</span> ${msg}`;
+            UI.console.appendChild(entry);
+            UI.console.scrollTop = UI.console.scrollHeight;
+        }
+
+        async function toggleWakeLock(active) {
+            if ('wakeLock' in navigator) {
+                try {
+                    if (active && !State.wakeLock) {
+                        State.wakeLock = await navigator.wakeLock.request('screen');
+                        log('Wake Lock Active: Screen will stay on.', 'success');
+                    } else if (!active && State.wakeLock) {
+                        await State.wakeLock.release();
+                        State.wakeLock = null;
+                        log('Wake Lock Released.', 'info');
+                        
+                        // Scroll back to URL input field when reading completes
+                        if (State.isReading === false) {
+                            setTimeout(() => {
+                                UI.urlInput.scrollIntoView({ 
+                                    behavior: 'smooth', 
+                                    block: 'center'
+                                });
+                                log('Auto-scrolled to URL input field.', 'info');
+                            }, 500);
+                        }
+                    }
+                } catch (err) {
+                    console.error('Wake Lock Error:', err);
+                }
+            }
+        }
+
+        function init() {
+            // Voice Loading with Filters
+            const loadVoices = () => {
+                State.allVoices = window.speechSynthesis.getVoices();
+                applyVoiceFilter();
+            };
+
+            loadVoices();
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = loadVoices;
+            }
+
+            // Tabs
+            document.querySelectorAll('.z-tab').forEach(t => {
+                t.addEventListener('click', (e) => {
+                    document.querySelectorAll('.z-tab').forEach(x => x.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(x => x.classList.remove('active'));
+                    e.target.classList.add('active');
+                    document.getElementById(e.target.dataset.target).classList.add('active');
+                });
+            });
+
+            // Settings Pop-up
+            UI.settingsToggle.addEventListener('click', () => {
+                UI.settingsOverlay.classList.add('active');
+                log('Audio Configuration panel opened.', 'info');
+            });
+
+            UI.closeSettings.addEventListener('click', () => {
+                UI.settingsOverlay.classList.remove('active');
+            });
+
+            UI.settingsOverlay.addEventListener('click', (e) => {
+                if (e.target === UI.settingsOverlay) {
+                    UI.settingsOverlay.classList.remove('active');
+                }
+            });
+
+            UI.applySettings.addEventListener('click', () => {
+                UI.settingsOverlay.classList.remove('active');
+                log('Audio settings applied.', 'success');
+            });
+            
+            // Filters
+            document.querySelectorAll('.z-filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.z-filter-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    State.config.filter = e.target.dataset.filter;
+                    applyVoiceFilter();
+                });
+            });
+
+            // Sliders
+            ['rate', 'pitch', 'volume'].forEach(key => {
+                const slider = document.getElementById(`${key}Slider`);
+                const value = document.getElementById(`${key}Value`);
+                
+                slider.addEventListener('input', (e) => {
+                    State.config[key] = parseFloat(e.target.value);
+                    value.textContent = e.target.value + (key === 'volume' ? '%' : key === 'rate' ? 'x' : '');
+                    
+                    // Update reading time if rate changes
+                    if (key === 'rate' && State.totalWords > 0) {
+                        calculateReadingTime();
+                    }
+                });
+            });
+            
+            UI.voiceSelect.addEventListener('change', (e) => {
+                State.config.voiceIndex = parseInt(e.target.value);
+            });
+
+            // Selection Listener
+            document.addEventListener('selectionchange', () => {
+                const sel = window.getSelection().toString().trim();
+                UI.readSelBtn.style.display = sel.length > 0 ? 'block' : 'none';
+            });
+
+            UI.readSelBtn.addEventListener('click', () => {
+                const text = window.getSelection().toString().trim();
+                if(text) speakRawText(text);
+            });
+
+            // Close pop-up with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && UI.settingsOverlay.classList.contains('active')) {
+                    UI.settingsOverlay.classList.remove('active');
+                }
+            });
+
+            log('Z-Speech Engine Ready - Title Bar & Pop-up Config Active', 'success');
+        }
+
+        function applyVoiceFilter() {
+            const filter = State.config.filter;
+            State.filteredVoices = State.allVoices.filter(v => {
+                if (filter === 'all') return true;
+                const name = v.name.toLowerCase();
+                if (filter === 'male') return name.includes('male') || name.includes('david') || name.includes('guy') || name.includes('mark');
+                if (filter === 'female') return name.includes('female') || name.includes('zira') || name.includes('samantha') || name.includes('google');
+                return true;
+            });
+
+            UI.voiceSelect.innerHTML = '';
+            State.filteredVoices.forEach((voice, index) => {
+                const opt = document.createElement('option');
+                opt.value = index;
+                opt.textContent = `${voice.name} (${voice.lang})`;
+                UI.voiceSelect.appendChild(opt);
+            });
+            
+            // Auto-select English Male if possible
+            if(filter === 'all' || filter === 'male') {
+                const defaultIdx = State.filteredVoices.findIndex(v => v.lang.includes('en') && (v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('david')));
+                if(defaultIdx !== -1) UI.voiceSelect.value = defaultIdx;
+            }
+            
+            State.config.voiceIndex = parseInt(UI.voiceSelect.value);
+        }
+
+        // Calculate reading time based on word count and rate
+        function calculateReadingTime() {
+            if (State.totalWords === 0) return;
+            
+            // Average reading speed: 200 words per minute at 1x speed
+            const baseMinutes = State.totalWords / 200;
+            // Adjust for current rate
+            State.readingTimeMinutes = baseMinutes / State.config.rate;
+            
+            const minutes = Math.ceil(State.readingTimeMinutes);
+            UI.readingTime.textContent = `Reading Time: ~${minutes} min`;
+        }
+
+        // Update title bar with content title
+        function updateTitleBar(title, url) {
+            if (title && url) {
+                State.currentTitle = title;
+                State.currentUrl = url;
+                
+                UI.titleText.textContent = title;
+                UI.contentTitle.href = url;
+                UI.titleBar.classList.add('visible');
+                
+                log(`Title Bar Updated: "${title}"`, 'info');
+            } else {
+                UI.titleBar.classList.remove('visible');
+            }
+        }
+
+        // --- Content Processing ---
+
+        function parseContent(text) {
+            // First split by double line breaks or single line breaks (like original app)
+            let paragraphs = text.split(/\n\n+|\n/).filter(p => p.trim().length > 0);
+            
+            // If no clear paragraphs, split by sentences and group (like original app)
+            if (paragraphs.length === 1) {
+                const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+                // Group sentences into paragraphs of ~5 sentences each
+                paragraphs = [];
+                for (let i = 0; i < sentences.length; i += 5) {
+                    paragraphs.push(sentences.slice(i, i + 5).join(' '));
+                }
+            }
+            
+            // Now split each paragraph into sentences for highlighting
+            const result = [];
+            paragraphs.forEach(para => {
+                const sentences = para.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [para];
+                const cleanedSentences = sentences.map(s => s.trim()).filter(s => s.length > 0);
+                if (cleanedSentences.length > 0) {
+                    result.push(cleanedSentences);
+                }
+            });
+            
+            return result.length > 0 ? result : [[text]];
+        }
+
+        function renderReader() {
+            UI.reader.innerHTML = '';
+            if (State.paragraphs.length === 0) {
+                UI.reader.innerHTML = '<div style="text-align: center; color: var(--z-text-muted); padding-top: 100px;"><i class="fas fa-microchip" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.5;"></i><p>Awaiting Data Injection...</p></div>';
+                UI.progress.classList.remove('active');
+                UI.titleBar.classList.remove('visible');
+                updateControls();
+                return;
+            }
+
+            State.paragraphs.forEach((sentences, paraIdx) => {
+                const pEl = document.createElement('p');
+                pEl.className = 'z-paragraph';
+                pEl.id = `para-${paraIdx}`;
+                
+                sentences.forEach((sentence, sentIdx) => {
+                    const span = document.createElement('span');
+                    span.className = 'z-sentence';
+                    span.dataset.paraIdx = paraIdx;
+                    span.dataset.sentIdx = sentIdx;
+                    span.textContent = sentence + (sentIdx < sentences.length - 1 ? ' ' : '');
+                    pEl.appendChild(span);
+                });
+                
+                UI.reader.appendChild(pEl);
+            });
+            
+            // Calculate total words
+            State.totalWords = State.paragraphs.reduce((total, paragraph) => {
+                return total + paragraph.join(' ').split(/\s+/).length;
+            }, 0);
+            
+            calculateReadingTime();
+            updateProgress();
+            UI.progress.classList.add('active');
+            updateControls();
+            log(`Loaded ${State.paragraphs.length} paragraphs (${State.totalWords} words).`, 'success');
+        }
+
+        function updateProgress() {
+            if (State.paragraphs.length === 0) {
+                UI.progress.textContent = 'Para 0 of 0 | Sent 0 of 0';
+                return;
+            }
+            const paraTotal = State.paragraphs.length;
+            const sentTotal = State.paragraphs[State.currentPara]?.length || 0;
+            UI.progress.textContent = `Para ${State.currentPara + 1} of ${paraTotal} | Sent ${State.currentSentence + 1} of ${sentTotal}`;
+        }
+
+        function updateControls() {
+            const hasContent = State.paragraphs.length > 0;
+            
+            // Enable/disable main controls
+            UI.playBtn.disabled = !hasContent;
+            UI.stopBtn.disabled = !hasContent;
+            
+            // Enable/disable navigation based on position
+            if (hasContent) {
+                UI.prevBtn.disabled = State.currentPara <= 0;
+                UI.nextBtn.disabled = State.currentPara >= State.paragraphs.length - 1;
+            } else {
+                UI.prevBtn.disabled = true;
+                UI.nextBtn.disabled = true;
+            }
+        }
+
+        // --- Fetch Logic ---
+
+        document.getElementById('fetchBtn').addEventListener('click', async () => {
+            const url = document.getElementById('urlInput').value.trim();
+            if (!url) return log('URL is required.', 'error');
+            
+            State.currentUrl = url;
+            log(`Fetching: ${url}...`, 'info');
+            const btn = document.getElementById('fetchBtn');
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Loading...';
+            btn.disabled = true;
+
+            try {
+                let html = null;
+                let pageTitle = '';
+                
+                // Try Primary Proxy
+                try {
+                    const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+                    if(res.ok) {
+                        const data = await res.json();
+                        html = data.contents;
+                    }
+                } catch(e) { console.warn('Primary proxy failed.'); }
+
+                // Try Fallback Proxy
+                if(!html) {
+                    const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
+                    if(res.ok) html = await res.text();
+                }
+
+                if(!html) throw new Error('Proxy gateways unreachable.');
+
+                const doc = new DOMParser().parseFromString(html, 'text/html');
+                
+                // Get page title
+                pageTitle = doc.querySelector('title')?.textContent || 'Untitled Document';
+                updateTitleBar(pageTitle, url);
+                
+                // Cleanup
+                ['script','style','nav','footer','iframe','noscript','.ad','.advertisement'].forEach(s => 
+                    doc.querySelectorAll(s).forEach(e => e.remove())
+                );
+
+                // Extraction
+                const selectors = ['article', '.chapter-content', '#content', 'main', 'body'];
+                let contentEl = null;
+                for(const sel of selectors) {
+                    const el = doc.querySelector(sel);
+                    if(el && el.innerText.length > 300) { contentEl = el; break; }
+                }
+
+                const rawText = contentEl ? contentEl.innerText : doc.body.innerText;
+                const cleanText = rawText.replace(/\s+/g, ' ').trim();
+                
+                State.paragraphs = parseContent(cleanText);
+                State.currentPara = 0;
+                State.currentSentence = 0;
+                renderReader();
+                btn.innerHTML = '<i class="fas fa-check"></i> Loaded';
+                log(`Content loaded successfully with ${State.paragraphs.length} paragraphs`, 'success');
+
+            } catch(err) {
+                log(`Error: ${err.message}`, 'error');
+                btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Retry';
+                // Still show title bar even if fetch partially failed
+                if (State.currentUrl) {
+                    updateTitleBar('Failed to load content', State.currentUrl);
+                }
+            }
+            btn.disabled = false;
+        });
+
+        document.getElementById('loadTextBtn').addEventListener('click', () => {
+            const text = document.getElementById('textInput').value.trim();
+            if(!text) return log('No text to process.', 'error');
+            
+            // Extract first line as title or use default
+            const firstLine = text.split('\n')[0].substring(0, 100);
+            const title = firstLine.length > 20 ? firstLine : 'Direct Text Input';
+            updateTitleBar(title, '#');
+            
+            State.paragraphs = parseContent(text);
+            State.currentPara = 0;
+            State.currentSentence = 0;
+            renderReader();
+            log(`Text processed with ${State.paragraphs.length} paragraphs`, 'success');
+        });
+
+        document.getElementById('clearTextBtn').addEventListener('click', () => {
+            document.getElementById('textInput').value = '';
+            log('Text input cleared.', 'info');
+        });
+
+        // --- Speech Logic ---
+
+        function speakRawText(text) {
+            speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text);
+            configureUtterance(u);
+            u.onstart = () => {
+                toggleWakeLock(true);
+                UI.visualizer.style.opacity = '1';
+                log('Reading selection...', 'info');
+            };
+            u.onend = () => {
+                toggleWakeLock(false);
+                UI.visualizer.style.opacity = '0.5';
+            };
+            speechSynthesis.speak(u);
+        }
+
+        function speak(paraIdx, sentIdx = 0) {
+            if (!State.paragraphs[paraIdx] || !State.paragraphs[paraIdx][sentIdx]) {
+                stopSpeech();
+                return;
+            }
+
+            speechSynthesis.cancel();
+            
+            State.currentPara = paraIdx;
+            State.currentSentence = sentIdx;
+            highlightSentence(paraIdx, sentIdx);
+            updateProgress();
+            updateControls();
+
+            const sentence = State.paragraphs[paraIdx][sentIdx];
+            const utterance = new SpeechSynthesisUtterance(sentence);
+            configureUtterance(utterance);
+
+            utterance.onstart = () => {
+                State.isReading = true;
+                State.isPaused = false;
+                toggleWakeLock(true);
+                UI.playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                UI.visualizer.style.opacity = '1';
+                scrollIntoView(paraIdx, sentIdx);
+            };
+
+            utterance.onend = () => {
+                const nextSentenceIdx = sentIdx + 1;
+                
+                if (nextSentenceIdx < State.paragraphs[paraIdx].length) {
+                    // More sentences in current paragraph
+                    speak(paraIdx, nextSentenceIdx);
+                } else if (paraIdx < State.paragraphs.length - 1) {
+                    // Move to next paragraph
+                    speak(paraIdx + 1, 0);
+                } else {
+                    // End of content
+                    stopSpeech();
+                    log('Reading complete.', 'success');
+                }
+            };
+
+            utterance.onerror = (e) => {
+                log(`Speech Error: ${e.error}`, 'error');
+                stopSpeech();
+            };
+
+            speechSynthesis.speak(utterance);
+        }
+
+        function configureUtterance(u) {
+            if(State.filteredVoices[State.config.voiceIndex]) {
+                u.voice = State.filteredVoices[State.config.voiceIndex];
+            }
+            u.rate = State.config.rate;
+            u.pitch = State.config.pitch;
+            u.volume = State.config.volume;
+        }
+
+        function highlightSentence(paraIdx, sentIdx) {
+            // Remove all highlights
+            document.querySelectorAll('.z-sentence').forEach(span => {
+                span.classList.remove('z-highlight');
+            });
+            
+            // Add highlight to current sentence
+            const targetSpan = document.querySelector(`.z-sentence[data-para-idx="${paraIdx}"][data-sent-idx="${sentIdx}"]`);
+            if (targetSpan) {
+                targetSpan.classList.add('z-highlight');
+            }
+        }
+
+        function scrollIntoView(paraIdx, sentIdx) {
+            const targetSpan = document.querySelector(`.z-sentence[data-para-idx="${paraIdx}"][data-sent-idx="${sentIdx}"]`);
+            if (targetSpan) {
+                targetSpan.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center',
+                    inline: 'nearest'
+                });
+            }
+        }
+
+        function stopSpeech() {
+            speechSynthesis.cancel();
+            State.isReading = false;
+            State.isPaused = false;
+            toggleWakeLock(false);
+            UI.playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            UI.visualizer.style.opacity = '0.5';
+            
+            // Remove highlights
+            document.querySelectorAll('.z-sentence').forEach(span => {
+                span.classList.remove('z-highlight');
+            });
+            
+            updateControls();
+        }
+
+        // --- Playback Controls ---
+
+        UI.playBtn.addEventListener('click', () => {
+            if (State.paragraphs.length === 0) {
+                log('No content to read. Please load content first.', 'error');
+                return;
+            }
+
+            if (State.isReading && !State.isPaused) {
+                speechSynthesis.pause();
+                State.isPaused = true;
+                toggleWakeLock(false);
+                UI.playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                UI.visualizer.style.opacity = '0.5';
+                log('Paused.', 'info');
+            } else if (State.isPaused) {
+                speechSynthesis.resume();
+                State.isPaused = false;
+                toggleWakeLock(true);
+                UI.playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                UI.visualizer.style.opacity = '1';
+                log('Resumed.', 'info');
+            } else {
+                speak(State.currentPara, State.currentSentence);
+                log('Started reading.', 'info');
+            }
+        });
+
+        UI.stopBtn.addEventListener('click', () => {
+            stopSpeech();
+            State.currentPara = 0;
+            State.currentSentence = 0;
+            updateProgress();
+            updateControls();
+            log('Stopped reading.', 'info');
+        });
+
+        UI.nextBtn.addEventListener('click', () => {
+            if (State.currentPara < State.paragraphs.length - 1) {
+                stopSpeech();
+                State.currentPara++;
+                State.currentSentence = 0;
+                updateProgress();
+                updateControls();
+                speak(State.currentPara, 0);
+                log(`Moved to paragraph ${State.currentPara + 1}`, 'info');
+            }
+        });
+
+        UI.prevBtn.addEventListener('click', () => {
+            if (State.currentPara > 0) {
+                stopSpeech();
+                State.currentPara--;
+                State.currentSentence = 0;
+                updateProgress();
+                updateControls();
+                speak(State.currentPara, 0);
+                log(`Moved to paragraph ${State.currentPara + 1}`, 'info');
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
