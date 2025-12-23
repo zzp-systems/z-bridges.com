@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <url>
+        <loc>https://zzp-systems.github.io/z-bridges.com/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://zzp-systems.github.io/z-bridges.com/"/>
+    </url>
+    
+    <url>
+        <loc>https://zzp-systems.github.io/z-bridges.com/zknowledge/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://zzp-systems.github.io/z-bridges.com/zknowledge/"/>
+    </url>
+    <url>
+        <loc>https://zzp-systems.github.io/z-bridges.com/zprojects/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://zzp-systems.github.io/z-bridges.com/zprojects/"/>
+    </url>
+    <url>
+        <loc>https://zzp-systems.github.io/z-bridges.com/zarchives/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://zzp-systems.github.io/z-bridges.com/zarchives/"/>
+    </url>
+    <url>
+        <loc>https://zzp-systems.github.io/z-bridges.com/zmartpdffiller/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://zzp-systems.github.io/z-bridges.com/zmartpdffiller/"/>
+    </url>
+    <url>
+        <loc>https://zzp-systems.github.io/z-bridges.com/storybooker/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://zzp-systems.github.io/z-bridges.com/storybooker/"/>
+    </url>    
+    
+    <url>
+        <loc>https://zzp-systems.github.io/z-bridges.com/zassets/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+</urlset>
