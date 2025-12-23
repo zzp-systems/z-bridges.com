@@ -1,0 +1,59 @@
+/* FORGIE: Aesthetic Core v3.0 - "Futuristic Innovation" Theme */
+/* This unified stylesheet is referenced by all pages for brand consistency. */
+:root {
+    --bg-main: #f5f5dc; /* Beige */
+    --bg-card: #ffffff;
+    --bg-accent: #d4af37; /* Gold */
+    --text-primary: #2c3e50; /* Dark Blue-Gray */
+    --text-secondary: #475569;
+    --accent: #556b2f; /* Dark Green */
+    --border: #cccccc; /* Light Grey */
+    --primary: #cccccc; /* Light Grey */
+    --secondary-text-on-dark: #f5f5dc; /* Beige for text on dark backgrounds */
+    --font-sans: "Inter", system-ui, sans-serif;
+    --font-serif: "Source Serif 4", Georgia, serif;
+}
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+}
+.card-hover-effect {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover-effect:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+#search-results a {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.2s ease;
+}
+#search-results a:last-child {
+    border-bottom: none;
+}
+#search-results a:hover {
+    background-color: #f1f5f9;
+}
+#search-results .result-title {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+#search-results .result-category {
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+}
